@@ -1,0 +1,42 @@
+placeholderPesquisa=Type a term for search
+nome=Name
+matricula=Registration
+pesquisar=Search
+novo=New
+mensagemVaziaAluno=None Student Registered
+mensagemVaziaProfessor=None Teacher Registered
+mensagemVaziaCurso=None Program Registered
+aluno=Student
+professor=Teacher
+dataNascimento=Date of Birth
+acoes=Actions
+editar=Edit
+excluir=Remove
+formularioAluno=Student Form
+formularioCurso=Program Form
+formularioProfessor=Teacher Form
+cursos=Programs
+curso=Program
+salvar=Save
+tituloCabecalhoAluno= Management Student
+tituloCabecalhoProfessor= Management Teacher
+tituloCabecalhoCurso= Management Programs
+formacao=Degree
+inicio=Home
+alunos=Students
+professores=Teachers
+salvarSucessoAluno=Student was saved successfully!
+salvarSucessoCurso=Program was saved successfully!
+salvarSucessoProfessor=Teacher was saved successfully!
+excluirSucessoAluno=Student was removed successfully!
+excluirSucessoCurso=Program was removed successfully!
+excluirSucessoProfessor=Teacher was removed successfully!
+portugues=Portuguese
+ingles=English
+idioma=Language
+cpfJaCadastrado=CPF already registered
+matriculaJaExiste=Registration already registered
+
+
+
+

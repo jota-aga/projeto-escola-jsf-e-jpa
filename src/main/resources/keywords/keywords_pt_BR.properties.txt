@@ -1,0 +1,45 @@
+placeholderPesquisa=Digite um termo para pesquisa
+nome=Nome
+matricula=Matrícula
+pesquisar=Pesquisar
+professor=Professor
+novo=Novo
+mensagemVaziaAluno=Nenhum Aluno Cadastrado
+mensagemVaziaProfessor=Nenhum Professor Cadastrado
+mensagemVaziaCurso=Nenhum Curso Cadastrado
+aluno=Aluno
+dataNascimento=Data de Nascimento
+acoes=Ações
+editar=Editar
+excluir=Excluir
+formularioAluno=Formulário Aluno
+formularioCurso=Formulário Curso
+formularioProfessor=Formulário Professor
+cursos=Cursos
+curso=Cursos
+salvar=Salvar
+tituloAluno=Aluno
+tituloProfessor=Professor
+tituloCurso=Curso
+tituloCabecalhoAluno= Gestão de Alunos
+tituloCabecalhoProfessor= Gestão de Professores
+tituloCabecalhoCurso= Gestão de Cursos
+formacao=Formação
+inicio=Inicio
+alunos=Alunos
+professores=professores
+salvarSucessoAluno=Aluno foi salvo com sucesso!
+salvarSucessoCurso=Curso foi salvo com sucesso!
+salvarSucessoProfessor=Professor foi salvo com sucesso!
+excluirSucessoAluno=Aluno foi excluido com sucesso!
+excluirSucessoCurso=Curso foi excluido com sucessso!
+excluirSucessoProfessor=Professor foi excluido com sucesso!
+portugues=Português
+ingles=Inglês
+idioma=Idioma
+cpfJaCadastrado=CPF já cadastrado
+matriculaJaExiste=Matricula já cadastrada
+
+
+
+
