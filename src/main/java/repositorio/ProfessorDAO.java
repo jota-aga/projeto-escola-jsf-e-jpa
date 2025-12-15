@@ -54,7 +54,7 @@ public class ProfessorDAO implements Serializable{
 	}
 	
 	public List<Professor> procurarPorNome(String nome) {
-		Query q = manager.createQuery("select a from Professor a where a.nome like :nome");
+		Query q = manager.createQuery("select a from Professor a where a.nome like :nome", Professor.class);
 		
 		q.setParameter("nome", '%'+nome+'%');
 		

@@ -12,6 +12,8 @@ import repositorio.CursoDAO;
 import util.Transacional;
 
 public class CursoService implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	@Inject
 	private CursoDAO dao;
 	

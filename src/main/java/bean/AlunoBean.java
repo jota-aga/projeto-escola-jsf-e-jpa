@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -17,9 +18,14 @@ import org.primefaces.context.RequestContext;
 
 import modelo.Aluno;
 import modelo.Curso;
+import modelo.Nota;
+import modelo.TipoUsuario;
+import modelo.Usuario;
 import repositorio.AlunoDAO;
 import repositorio.CursoDAO;
+import repositorio.NotaDAO;
 import service.AlunoService;
+import service.NotaService;
 
 @Named
 @ViewScoped
@@ -36,16 +42,24 @@ public class AlunoBean implements Serializable{
 	private String termoPesquisa;
 	
 	private String opcaoPesquisa = "nome";
+	
 	@Inject
 	private AlunoService service;
 	
+	@Inject
+	private NotaService notaService;
+	
 	private Set<Curso> cursosSelecionados;
+	
+	private Curso cursoSelecionado;
 	
 	private List<Aluno> todosAlunos;
 	
 	private CursoConverter cursoConverter;
 	
 	private Aluno aluno;
+	
+	private Nota nota;
 	
 	public void procuraTodosAlunos() {
 		this.todosAlunos = dao.procurarTodos();
@@ -61,6 +75,12 @@ public class AlunoBean implements Serializable{
 		cursosSelecionados = new HashSet<>(this.aluno.getCursos());
 	}
 	
+	public void prepararAdicaoNota(Aluno aluno) {
+		cursosSelecionados = new HashSet<>(aluno.getCursos());
+		nota = new Nota();
+		nota.setAluno(aluno);
+	}
+	
 	public List<Aluno> getTodosAlunos(){
 		return this.todosAlunos;
 	}
@@ -72,6 +92,11 @@ public class AlunoBean implements Serializable{
 		
 		if(!matriculaRepetida) {
 			aluno.setCursos(new HashSet<>(cursosSelecionados));
+			String senha = UUID.randomUUID().toString();
+			Usuario usuario = new Usuario();
+			usuario.setSenha(senha);
+			usuario.setTipoUsuario(TipoUsuario.ALUNO);
+			aluno.setUsuario(usuario);
 			service.salvarAluno(aluno);
 			
 			
@@ -91,6 +116,7 @@ public class AlunoBean implements Serializable{
 	}
 	
 	public void excluirAluno(Aluno aluno) {
+		notaService.excluirPorAluno(aluno.getId());
 		service.excluirAluno(aluno);
 		
 		Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
@@ -99,6 +125,11 @@ public class AlunoBean implements Serializable{
 		
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(mensagemSucesso));
 		this.procuraTodosAlunos();
+	}
+	
+	public void salvarNota() {
+		notaService.salvarNota(nota);
+		cursoSelecionado = null;
 	}
 	
 	public void pesquisarAlunos() {
@@ -181,4 +212,13 @@ public class AlunoBean implements Serializable{
 	public void setCursosSelecionados(Set<Curso> cursosSelecionados) {
 		this.cursosSelecionados = cursosSelecionados;
 	}
+
+	public Nota getNota() {
+		return nota;
+	}
+
+	public void setNota(Nota nota) {
+		this.nota = nota;
+	}
+	
 }

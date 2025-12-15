@@ -35,6 +35,11 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/erros/404.xhtml</location>
+	</error-page>
 
 	<welcome-file-list>
 

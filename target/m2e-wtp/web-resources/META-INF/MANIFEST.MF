@@ -1,4 +1,5 @@
 Manifest-Version: 1.0
-Build-Jdk-Spec: 21
+Built-By: registrocom
+Build-Jdk: 1.8.0_462
 Created-By: Maven Integration for Eclipse
 

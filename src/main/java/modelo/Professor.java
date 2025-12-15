@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -30,11 +31,12 @@ public class Professor {
 	
 	@NotEmpty
 	private String formacao;
-	
-	private String senha;
-	
+		
 	@ManyToOne(optional=true, cascade = CascadeType.MERGE)
 	private Curso curso;
+	
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+	private Usuario usuario;
 
 	public Integer getId() {
 		return id;
@@ -76,11 +78,11 @@ public class Professor {
 		this.curso = curso;
 	}
 
-	public String getSenha() {
-		return senha;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }

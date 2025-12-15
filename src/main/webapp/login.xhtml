@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
  	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	template="/WEB-INF/template/layout.xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
-</head>
-<body>
-	<h:form>
-		<p:panelGrid columns="1">
-		
-			<p:outputLabel for="login"/>
-			<p:inputText id="login" value="#{loginBean.login}"/>
+	
+<ui:define name="titulo">Login</ui:define>
+
+<ui:define name="titulo-cabecalho">Login</ui:define>
+
+<ui:define name="conteudo" >
+		<h1 style="margin-bottom:30px; text-align:center">Login</h1>
+		<h:form id="loginForm" style="display: flex; flex-direction:column; width:450px; align-items:center; margin:0 auto 0 auto;">
+			<p:messages id="loginMessages" showSummary="true" showDetail="true"/>
+			<p:panelGrid columns="2">
 			
-			<p:outputLabel for="senha" value="Senha:"/>
-			<p:inputText id="senha" value="#{loginBean.senha}"/>
-			
-			<p:selectOneButton value="#{loginBean.tipoLogin}">
-				<f:selectItem itemLabel="#{key.aluno}" itemValue="aluno"/>
-				<f:selectItem itemLabel="#{key.professor}" itemValue="professor"/>
-			</p:selectOneButton>
-			
-		</p:panelGrid>
-		<h:commandButton value="Acessar"/>
-	</h:form>
-</body>
-</html>
+				<p:outputLabel for="login" value="Login:"/>
+				<p:inputText id="login" style="margin-bottom:10px;" value="#{loginBean.login}" />
+				
+				<p:outputLabel for="senha" value="#{key.senha}"/>
+				<p:inputText id="senha" value="#{loginBean.senha}" />
+				
+				<p:outputLabel for="tipoUsuario" value="#{key.tipoUsuario}"/>
+				<p:selectOneButton id="tipoUsuario" value="#{loginBean.tipoLogin}" style="margin:18px 0 10px 0;">
+					<f:selectItem itemLabel="#{key.aluno}" itemValue="aluno"/>
+					<f:selectItem itemLabel="#{key.professor}" itemValue="professor"/>
+				</p:selectOneButton>
+				
+			</p:panelGrid>
+			<p:commandButton update="loginMessages" value="#{key.acessar}" action="#{loginBean.validarLogin()}" style="margin-top: 10px"/>
+		</h:form>
+</ui:define>
+</ui:composition>

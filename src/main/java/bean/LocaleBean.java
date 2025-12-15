@@ -2,7 +2,6 @@ package bean;
 
 import java.io.Serializable;
 
-
 import java.util.Locale;
 
 import javax.enterprise.context.SessionScoped;
@@ -14,6 +13,7 @@ import javax.inject.Named;
 @SessionScoped
 public class LocaleBean implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private Locale currentLocale = Locale.US;
 	
 	public void mudarLocaleParaEN() {

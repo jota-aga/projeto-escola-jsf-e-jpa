@@ -16,6 +16,7 @@ import org.primefaces.context.RequestContext;
 import modelo.Curso;
 import repositorio.CursoDAO;
 import service.CursoService;
+import service.NotaService;
 import service.ProfessorService;
 
 @Named
@@ -28,13 +29,16 @@ public class CursoBean implements Serializable{
 	@Inject
 	private CursoDAO dao;
 	
-	private String termoPesquisa;
+	private String termoPesquisa = "Vazio";
 	
 	@Inject
 	private CursoService service;
 	
 	@Inject
 	private ProfessorService professorService;
+	
+	@Inject 
+	private NotaService notaService;
 	
 	private Curso curso;
 	
@@ -68,6 +72,7 @@ public class CursoBean implements Serializable{
 	}
 	
 	public void excluirCurso(Curso curso) {
+		notaService.excluirPorCurso(curso.getId());
 		professorService.excluirRelacaoCurso(curso.getId());
 		
 			

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -15,7 +16,10 @@ import org.primefaces.context.RequestContext;
 
 import modelo.Curso;
 import modelo.Professor;
+import modelo.TipoUsuario;
+import modelo.Usuario;
 import repositorio.CursoDAO;
+import repositorio.NotaDAO;
 import repositorio.ProfessorDAO;
 import service.ProfessorService;
 
@@ -35,6 +39,8 @@ public class ProfessorBean implements Serializable{
 	
 	@Inject
 	private ProfessorDAO dao;
+	
+	@Inject NotaDAO notaDAO;
 	
 	@Inject
 	private ProfessorService service;
@@ -62,6 +68,11 @@ public class ProfessorBean implements Serializable{
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, null, mensagemErro));
 		}
 		else {
+			Usuario usuario = new Usuario();
+			String senha = UUID.randomUUID().toString();
+			usuario.setSenha(senha);
+			usuario.setTipoUsuario(TipoUsuario.PROFESSOR);
+			professor.setUsuario(usuario);
 			service.salvarProfessor(professor);
 			
 			

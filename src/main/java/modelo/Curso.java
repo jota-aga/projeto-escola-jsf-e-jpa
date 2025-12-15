@@ -2,9 +2,11 @@ package modelo;
 
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,7 +37,10 @@ public class Curso {
 	private Set<Aluno> alunos = new HashSet<>();
 	
 	@OneToMany(mappedBy = "curso")
-	private Set<Professor> professor;
+	private Set<Professor> professores;
+	
+	@OneToMany(cascade = {CascadeType.REMOVE})
+	private List<Nota> notas;
 
 	public Integer getId() {
 		return id;
@@ -59,6 +64,18 @@ public class Curso {
 
 	public void setAlunos(Set<Aluno> alunos) {
 		this.alunos = alunos;
+	}
+	
+	public int getQuantidadeAlunos() {
+		return alunos.size();
+	}
+
+	public Set<Professor> getProfessores() {
+		return professores;
+	}
+
+	public void setProfessores(Set<Professor> professores) {
+		this.professores = professores;
 	}
 
 	@Override

@@ -9,6 +9,7 @@
 <f:view locale="#{localeBean.currentLocale}">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<ui:insert name="head"></ui:insert>
 	<title> <ui:insert name="titulo"/></title>
 </h:head>
 
@@ -20,6 +21,7 @@
 		<h:link value="#{key.alunos}" outcome="aluno" style="margin-right:10px"/>
 		<h:link value="#{key.professores}" outcome="professor" style="margin-right:10px"/>
 		<h:link value="#{key.cursos}" outcome="curso" style="margin-right:10px"/>
+		<h:commandButton action="#{loginBean.logout}" value="Logout"/>
 	</h:form>
 	</header>
 	
