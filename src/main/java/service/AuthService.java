@@ -37,6 +37,7 @@ public class AuthService implements Serializable{
 		
 		if(usuario == null || !usuario.getSenha().equals(senha)) {
 			AddMessageUtil.adicionarMensagem(null, "loginIncorreto", FacesMessage.SEVERITY_ERROR, "messages");
+			return null;
 		}
 		
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
@@ -47,11 +48,17 @@ public class AuthService implements Serializable{
 			session.setAttribute("usuario", aluno);
 			return TipoDeUsuario.ALUNO;
 		}
-		else {
+		else if(usuario.getTipoDeUsuario() == TipoDeUsuario.PROFESSOR){
 			Professor professor = professorDAO.procurarPorUsuario(usuario);
 			
 			session.setAttribute("usuario", professor);
 			return TipoDeUsuario.PROFESSOR;
+		}
+		else {
+			
+			session.setAttribute("usuario", usuario);
+			System.out.println("================= TipoUsuario foi adicionado");
+			return TipoDeUsuario.ADMIN;
 		}
 	}
 	

@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
-	<p:dialog id="dialog-form-aluno" widgetVar="dialog-form-aluno-widgetvar"  value="#{adminBean.alunos}" closeOnEscape="true" header="Editar Aluno" modal="true" >
+	<p:dialog id="dialog-form-aluno" widgetVar="dialog-form-aluno-widgetvar" closeOnEscape="true" header="Editar Aluno" modal="true" >
 		<p:panelGrid columns="2">
 			<p:outputLabel for="nome" value="Nome: "/>
 			<p:inputText id="nome" value="#{bean.aluno.usuario.nome}" />

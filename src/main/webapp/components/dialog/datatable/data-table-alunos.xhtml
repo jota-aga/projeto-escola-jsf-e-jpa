@@ -26,16 +26,22 @@
 		
 		<p:column headerText="Opções">
 			<p:commandButton icon="fa fa-pencil" actionListener="#{bean.prepararEdicaoAluno(aluno)}" 
-			oncomplete="PF('dialog-form-aluno-widgetvar').show()" process="@this" update="@form:data-table-alunos @form:dialog-form-aluno">
+			oncomplete="PF('dialog-form-aluno-widgetvar').show()" process="@this" update="@form:data-table-alunos @form:dialog-form-aluno" 
+			rendered="#{bean.tipoDeUsuario eq 'ADMIN'}" >
 				<p:resetInput target="@form:dialog-form-aluno"/>
 			</p:commandButton>
 			
-			<p:commandButton icon="fa fa-trash" actionListener="#{bean.excluirAluno(aluno)}" process="@this" update="@form:data-table-alunos"/>
-
+			<p:commandButton icon="fa fa-trash" actionListener="#{bean.excluirAluno(aluno)}" process="@this" update="@form:data-table-alunos" 
+			rendered="#{bean.tipoDeUsuario eq 'ADMIN'}"/>
+			
+			<p:commandButton value="Adicionar Nota" rendered="#{bean.tipoDeUsuario eq 'PROFESSOR'}" 
+			actionListener="#{bean.prepararAdicaoDeNota(aluno)}" process="@this" update="@form:dialog-form-nota" oncomplete="PF('dialog-form-nota-widgetvar').show()">
+				<p:resetInput target="@form:dialog-form-nota"/>
+			</p:commandButton>
+			
+			<p:commandButton icon="fa fa-eye" rendered="#{bean.tipoDeUsuario eq 'PROFESSOR'}" 
+			actionListener="#{bean.procurarNotasPorAlunoECurso(aluno)}" process="@this" update="@form:dialog-notas" oncomplete="PF('dialog-notas-widgetvar').show()"/>
+				
 		</p:column>
-	</p:dataTable>
-	
-	<ui:include src="/components/dialog/formulario/form-aluno.xhtml">
-		<ui:param name="bean" value="#{bean}"/>
-	</ui:include>	
+	</p:dataTable>	
 </ui:fragment>

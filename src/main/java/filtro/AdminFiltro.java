@@ -2,6 +2,7 @@ package filtro;
 
 import java.io.IOException;
 
+import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -12,13 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelo.Aluno;
-@WebFilter(urlPatterns = {"/aluno.xhtml"})
-public class AlunoFiltro implements javax.servlet.Filter {
+import modelo.Usuario;
+
+@WebFilter(urlPatterns = {"/gerenciar-alunos.xhtml", "/gerenciar-professores.xhtml"})
+public class AdminFiltro implements Filter{
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -29,17 +31,17 @@ public class AlunoFiltro implements javax.servlet.Filter {
 		HttpServletRequest requestHttp = (HttpServletRequest) request;
 		HttpServletResponse responseHttp = (HttpServletResponse) response;
 		
-		HttpSession session = requestHttp.getSession();
+		HttpSession session	= requestHttp.getSession();
 		
-		Object usuario = session == null? null : session.getAttribute("usuario");
+		Object usuario = session == null ? null : session.getAttribute("usuario");
 		
-		if(usuario == null || !(usuario instanceof Aluno)) {
+		if(usuario == null || !(usuario instanceof Usuario)) {
 			String redirect = requestHttp.getContextPath()+"/login.xhtml";
 			responseHttp.sendRedirect(redirect);
+			return;
 		}
 		
 		chain.doFilter(request, response);
-	
 	}
 
 	@Override

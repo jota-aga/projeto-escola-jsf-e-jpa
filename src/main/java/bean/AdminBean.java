@@ -4,14 +4,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import modelo.Aluno;
 import modelo.Curso;
 import modelo.Professor;
+import modelo.Usuario;
 import repositorio.AlunoDAO;
 import repositorio.CursoDAO;
 import repositorio.ProfessorDAO;
@@ -57,6 +61,23 @@ public class AdminBean implements Serializable{
 	private boolean editandoProfessor;
 	
 	private boolean editandoAluno;
+	
+	private Usuario usuario;
+	
+	@PostConstruct
+	public void prepararPagina() {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		
+		Object usuarioLogado = session.getAttribute("usuario");
+		
+		if(usuarioLogado instanceof Usuario) {
+			usuario = (Usuario) usuarioLogado;
+		}
+		
+		if (usuario == null) {
+			System.out.println("================== USUARIO VAZIO");
+		}
+	}
 	
 	public void procurarTodosAlunos() {
 		alunos = alunoDAO.procurarTodos();
@@ -182,5 +203,12 @@ public class AdminBean implements Serializable{
 	
 	public boolean isTipoAluno() {
 		return editandoAluno;
+	}
+	
+	public String getTipoDeUsuario() {
+		if(usuario != null) {
+			return usuario.getTipoDeUsuario().name();
+		}
+		return null;
 	}
 }

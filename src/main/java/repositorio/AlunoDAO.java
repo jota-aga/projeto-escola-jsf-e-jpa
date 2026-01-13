@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
-
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import modelo.Aluno;
-import modelo.Professor;
+
+import modelo.Curso;import modelo.Curso;
 import modelo.Usuario;
 
 public class AlunoDAO implements Serializable{
@@ -82,5 +82,13 @@ public class AlunoDAO implements Serializable{
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+	
+	public List<Aluno> procurarAlunoPorCurso(Curso curso){
+		String jpql = "select a from Aluno a join a.cursos c where c = :curso";
+		Query q = manager.createQuery(jpql);
+		q.setParameter("curso", curso);
+		
+		return q.getResultList();
 	}
 }

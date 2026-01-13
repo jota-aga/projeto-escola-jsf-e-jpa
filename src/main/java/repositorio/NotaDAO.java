@@ -48,9 +48,9 @@ public class NotaDAO implements Serializable {
 	}
 	
 	public List<Nota> procurarPorCursoEAluno(Curso curso, Aluno aluno){
-		String jpql = "select n from Nota n where nota.curso = :curso anda nota.aluno = :aluno";
+		String jpql = "select n from Nota n where n.curso = :curso and n.aluno = :aluno";
 		
-		Query q = manager.createStoredProcedureQuery(jpql);
+		Query q = manager.createQuery(jpql);
 		
 		q.setParameter("curso", curso);
 		q.setParameter("aluno", aluno);

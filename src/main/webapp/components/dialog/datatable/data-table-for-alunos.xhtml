@@ -18,6 +18,8 @@
 		</p:column>
 	</p:dataTable>
 	
-	<ui:include src="/components/dialog/datatable/data-table-notas.xhtml"/>
+	<ui:include src="/components/dialog/datatable/data-table-notas.xhtml">
+		<ui:param name="bean" value="#{alunoBean}"></ui:param>
+	</ui:include>
 	
 </ui:fragment>

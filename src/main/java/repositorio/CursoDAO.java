@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import modelo.Aluno;
 import modelo.Curso;
+import modelo.Professor;
 
 public class CursoDAO implements Serializable{
 	

@@ -14,8 +14,9 @@ public class Nota {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@NotNull
-	private double nota;
+	private Double nota;
 	
 	@ManyToOne	
 	private Curso curso;
@@ -47,11 +48,11 @@ public class Nota {
 		this.aluno = aluno;
 	}
 
-	public double getNota() {
+	public Double getNota() {
 		return nota;
 	}
 
-	public void setNota(double nota) {
+	public void setNota(Double nota) {
 		this.nota = nota;
 	}
 }

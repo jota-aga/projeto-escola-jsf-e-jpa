@@ -85,9 +85,13 @@ public class AuthBean implements Serializable{
 		if(tipoDoUsuarioLogado == TipoDeUsuario.ALUNO) {
 			return "aluno.xhtml?faces-redirect=true";
 		}
-		else {
-			return null;
+		else if(tipoDoUsuarioLogado == TipoDeUsuario.PROFESSOR) {
+			return "professor.xhtml?faces-redirect=true";
 		}
+		else if(tipoDoUsuarioLogado == TipoDeUsuario.ADMIN) {
+			return "gerenciar-alunos.xhtml?faces-redirect=true";
+		}
+		return "login.xhtml";
 	}
 	
 	public void procurarTodosOsCursos() {

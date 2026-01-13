@@ -7,9 +7,17 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
 	<p:dialog id="dialog-notas" widgetVar="dialog-notas-widgetvar" header="Notas" resizable="false" modal="true" closeOnEscape="true">
-		<p:dataTable id="data-table-notas" value="#{alunoBean.notas}" var="nota" emptyMessage="O aluno não possui notas no curso" style="text-align:center; width: 300px">
+		<p:dataTable id="data-table-notas" value="#{bean.notas}" var="nota" emptyMessage="O aluno não possui notas no curso" style="text-align:center; width: 300px">
 			<p:column headerText="Nota">
-				<h:outputText value="nota.nota"/>
+				<h:outputText value="#{nota.nota}"/>
+			</p:column>
+			
+			<p:column headerText="Opções" rendered="#{bean.tipoDeUsuario eq 'PROFESSOR'}">
+				<p:commandButton icon="fa fa-pencil" title="Editar Nota" actionListener="#{bean.prepararEdicaoDeNota(nota)}" 
+				oncomplete="PF('dialog-form-nota-widgetvar').show()" process="@this" update="mainForm:dialog-form-nota" >
+					<p:resetInput target="@form:dialog-form-nota"/>
+				</p:commandButton>
+				<p:commandButton icon="fa fa-trash" title="Excluir Nota" actionListener="#{bean.excluirNota(nota)}" update="data-table-notas"/>
 			</p:column>
 		</p:dataTable>
 	</p:dialog>

@@ -11,19 +11,19 @@
 </h:head>
 
 <h:body>
-	<f:metadata>
-		<f:viewAction action="#{adminBean.procurarTodosAlunos()}" />
-	</f:metadata>
 	<h:form id="mainForm">
-		<h:outputText value="DEBUG: #{bean.tipoDeUsuario}" />
-		<p:growl id="messages" showDetail="true" showSummary="true"/>
+		<p:growl id="messages" showSummary="true" showDetail="true"/>
 		<ui:include src="/components/dialog/datatable/data-table-alunos.xhtml">
-			<ui:param name="bean" value="#{adminBean}"/>
+			<ui:param name="bean" value="#{professorBean}"/>
+		</ui:include>
+
+		<ui:include src="/components/dialog/formulario/form-nota.xhtml">
+			<ui:param name="bean" value="#{professorBean}" />
 		</ui:include>
 		
-		<ui:include src="/components/dialog/formulario/form-aluno.xhtml">
-		<ui:param name="bean" value="#{adminBean}"/>
-	</ui:include>	
+		<ui:include src="/components/dialog/datatable/data-table-notas.xhtml">
+			<ui:param name="bean" value="#{professorBean}"/>
+		</ui:include>
 	</h:form>
 	
 </h:body>

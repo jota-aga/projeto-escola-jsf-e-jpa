@@ -32,7 +32,11 @@ public class AlunoBean implements Serializable{
 	@PostConstruct
 	public void prepararPagina() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		aluno = (Aluno) session.getAttribute("usuario");
+		Object usuario = session.getAttribute("usuario");
+
+		if(usuario instanceof Aluno) {
+			aluno = (Aluno) usuario;
+		}
 	}
 	
 	public void verNotasDoAluno(Curso curso) {
@@ -53,5 +57,13 @@ public class AlunoBean implements Serializable{
 
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
+	}
+	
+	public String getTipoDeUsuario() {
+		if(aluno != null) {
+			return aluno.getUsuario().getTipoDeUsuario().name();
+		}
+		return null;
+		
 	}
 }
