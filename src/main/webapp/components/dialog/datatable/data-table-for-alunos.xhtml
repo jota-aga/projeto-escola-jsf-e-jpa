@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+ 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<p:dataTable id="data-table-for-aluno" value="#{alunoBean.aluno.cursos}" var="curso" emptyMessage="O aluno não está cursando nenhum curso" 
+	style="text-align:center; width: 700px">
+		<p:column headerText="Curso">
+			<h:outputText value="#{curso.nome}"/>
+		</p:column>
+		
+		<p:column headerText="Opções">
+			<p:commandButton icon="fa fa-eye" value="Ver Notas" actionListener="#{alunoBean.verNotasDoAluno(curso)}" 
+			oncomplete="PF('dialog-notas-widgetvar').show()" update="@form:dialog-notas" process="@this"/>
+		</p:column>
+	</p:dataTable>
+	
+	<ui:include src="/components/dialog/datatable/data-table-notas.xhtml"/>
+	
+</ui:fragment>

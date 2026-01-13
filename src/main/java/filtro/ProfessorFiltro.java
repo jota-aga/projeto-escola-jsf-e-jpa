@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelo.TipoUsuario;
+import modelo.Professor;
+import modelo.TipoDeUsuario;
 
-@WebFilter(urlPatterns = {"/curso.xhtml", "/professor.xhtml", "/index.xhtml"})
+@WebFilter(urlPatterns = {"/professor.xhtml"})
 public class ProfessorFiltro implements javax.servlet.Filter{
 
 	@Override
@@ -32,9 +33,9 @@ public class ProfessorFiltro implements javax.servlet.Filter{
 		
 		HttpSession session = requestHttp.getSession(false);
 		
-		TipoUsuario usuario = session == null? null : (TipoUsuario) session.getAttribute("usuarioLogado");
+		Object usuario = session == null? null : session.getAttribute("usuario");
 		
-		if(usuario == null || usuario != TipoUsuario.PROFESSOR) {
+		if(usuario == null || !(usuario instanceof  Professor)) {
 	
 			String redirect = requestHttp.getContextPath()+"/login.xhtml";
 			responseHttp.sendRedirect(redirect);

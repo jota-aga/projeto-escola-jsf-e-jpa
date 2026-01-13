@@ -11,14 +11,17 @@
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/escola?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC"/>
-            <property name="javax.persistence.jdbc.user" value="desenvolvimento"/>
-            <property name="hibernate.connection.password" value="rcom2013rcom"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="hibernate.connection.password" value="Joao8223822."/>
 
            	<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             
+            <property name="javax.persistence.schema-generation.database.action" value="none"/>
+            <property name="javax.persistence.schema-generation.create-source" value="metadata"/>
+            <property name="javax.persistence.sql-load-script-source" value="META-INF/sql/admin.sql"/>
             
         </properties>
     </persistence-unit>

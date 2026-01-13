@@ -54,5 +54,4 @@ public class CursoDAO implements Serializable{
 		
 		return curso;
 	}
-	
 }

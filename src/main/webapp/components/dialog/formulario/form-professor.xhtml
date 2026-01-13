@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+ 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<p:dialog id="dialog-form-professor" widgetVar="dialog-form-professor-widgetvar"  value="#{adminBean.professores}" closeOnEscape="true" header="Editar Professor" modal="true" >
+		<p:panelGrid columns="2">
+			<p:outputLabel for="nome" value="Nome: "/>
+			<p:inputText id="nome" value="#{bean.professor.usuario.nome}" />
+			
+			<p:outputLabel for="formacao" value="Formação "/>
+			<p:inputText id="formacao" value="#{bean.professor.formacao}" />
+			
+			<p:outputLabel value="Cursos: "/>
+			<h:panelGroup>
+				<p:commandButton styleClass="button" value="Cursos"
+				oncomplete="PF('selecionar-cursos-dialog-widgetvar').show()"
+				process="@this" rendered="#{!bean.cursos.isEmpty()}" update="selecionar-cursos-dialog"/>
+				
+			<h:outputText value="Nenhum curso disponível no momento" rendered="#{bean.cursos.isEmpty()}" />
+			</h:panelGroup>
+			
+			<p:outputLabel for="cpf" value="CPF: "/>
+			<p:inputMask id="cpf" mask="999.999.999-99" value="#{bean.professor.usuario.cpf}"/>
+			
+			<p:outputLabel for="senha" value="Senha: "/>
+			<p:inputText id="senha" value="#{bean.professor.usuario.senha}" />
+			
+		</p:panelGrid>
+		<p:commandButton value="Salvar" actionListener="#{bean.salvarProfessor()}" oncomplete="if ()!args.validationFailed) PF('dialog-form-professor').hide()"
+				update="dialog-form-professor data-table-professores" process="dialog-form-professor" />
+	</p:dialog>	
+	
+	<ui:include src="/components/dialog/dialog-selecionar-cursos.xhtml">
+		<ui:param name="bean" value="#{bean}"></ui:param>
+	</ui:include>
+</ui:fragment>

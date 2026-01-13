@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import modelo.Aluno;
+import modelo.Curso;
 import modelo.Nota;
 
 public class NotaDAO implements Serializable {
@@ -43,5 +45,16 @@ public class NotaDAO implements Serializable {
 		q.setParameter("cursoId", cursoId);
 		
 		q.executeUpdate();
+	}
+	
+	public List<Nota> procurarPorCursoEAluno(Curso curso, Aluno aluno){
+		String jpql = "select n from Nota n where nota.curso = :curso anda nota.aluno = :aluno";
+		
+		Query q = manager.createStoredProcedureQuery(jpql);
+		
+		q.setParameter("curso", curso);
+		q.setParameter("aluno", aluno);
+	
+		return q.getResultList();
 	}
 }

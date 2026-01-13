@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+ 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<p:dataTable id="data-table-alunos" value="#{bean.alunos}" var="aluno" rowKey="#{aluno.id}" emptyMessage="Nenhum aluno cadastrado" 
+	style="text-align:center; width: 1000px">
+		<p:column headerText="Nome">
+			<h:outputText value="#{aluno.usuario.nome}"/>
+		</p:column>
+		
+		<p:column headerText="CPF">
+			<h:outputText value="#{aluno.usuario.cpf}"/>
+		</p:column>
+		
+		<p:column headerText="Matrícula">
+			<h:outputText value="#{aluno.matricula}"/>
+		</p:column>
+		
+		<p:column headerText="Data de Nascimento">
+			<h:outputText value="#{aluno.dataNascimento}"/>
+		</p:column>
+		
+		<p:column headerText="Opções">
+			<p:commandButton icon="fa fa-pencil" actionListener="#{bean.prepararEdicaoAluno(aluno)}" 
+			oncomplete="PF('dialog-form-aluno-widgetvar').show()" process="@this" update="@form:data-table-alunos @form:dialog-form-aluno">
+				<p:resetInput target="@form:dialog-form-aluno"/>
+			</p:commandButton>
+			
+			<p:commandButton icon="fa fa-trash" actionListener="#{bean.excluirAluno(aluno)}" process="@this" update="@form:data-table-alunos"/>
+
+		</p:column>
+	</p:dataTable>
+	
+	<ui:include src="/components/dialog/formulario/form-aluno.xhtml">
+		<ui:param name="bean" value="#{bean}"/>
+	</ui:include>	
+</ui:fragment>

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelo.TipoUsuario;
+import modelo.Aluno;
 @WebFilter(urlPatterns = {"/aluno.xhtml"})
 public class AlunoFiltro implements javax.servlet.Filter {
 
@@ -31,9 +31,9 @@ public class AlunoFiltro implements javax.servlet.Filter {
 		
 		HttpSession session = HttpRequest.getSession();
 		
-		TipoUsuario usuario = session == null ? null : (TipoUsuario) session.getAttribute("usuarioLogado");
+		Object usuario = session == null? null : session.getAttribute("usuario");
 		
-		if(session == null || usuario != TipoUsuario.ALUNO) {
+		if(session == null || !(usuario instanceof Aluno)) {
 			String redirect = HttpRequest.getContextPath()+"/login.xhtml";
 			HttpResponse.sendRedirect(redirect);
 		}

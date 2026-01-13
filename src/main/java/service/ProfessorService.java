@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 
+import modelo.Curso;
 import modelo.Professor;
 import repositorio.ProfessorDAO;
 import util.Transacional;
@@ -15,8 +16,11 @@ public class ProfessorService implements Serializable{
 	private ProfessorDAO dao;
 	
 	@Transacional
-	public void salvarProfessor(Professor professor) {
+	public boolean salvarProfessor(Professor professor, Curso cursosSelecionado) {
+		professor.setCurso(cursosSelecionado);
 		dao.salvar(professor);
+		
+		return true;
 	}
 	
 	@Transacional

@@ -6,9 +6,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import modelo.Aluno;
+import modelo.Professor;
+import modelo.Usuario;
 
 public class AlunoDAO implements Serializable{
 	
@@ -34,12 +37,16 @@ public class AlunoDAO implements Serializable{
 		manager.remove(aluno);
 	}
 	
-	public List<Aluno> procurarPorMatricula(String matricula) {
-		Query q = manager.createQuery("select a from Aluno a where a.matricula like :matricula");
-		
-		q.setParameter("matricula", '%'+matricula+'%');
-		
-		return q.getResultList();
+	public Aluno procurarPorMatricula(String matricula) {
+		try {
+			Query q = manager.createQuery("select a from Aluno a where a.matricula = :matricula");
+			
+			q.setParameter("matricula", matricula);
+			
+			return (Aluno) q.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 	
 	public List<Aluno> procurarPorNome(String nome) {
@@ -59,5 +66,21 @@ public class AlunoDAO implements Serializable{
 	public Aluno procurarPorId(Integer id) {
 		Aluno aluno = manager.find(Aluno.class, id);
 		return aluno;
+	}
+	
+	public Aluno procurarPorUsuario(Usuario usuario) {
+		try {
+			String jpql = "select a from Aluno a where a.usuario = :usuario";
+			
+			Query q = manager.createQuery(jpql);
+			
+			q.setParameter("usuario", usuario);
+			
+			Aluno aluno = (Aluno) q.getSingleResult();
+			
+			return aluno;
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 }

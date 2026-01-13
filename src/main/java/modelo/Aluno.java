@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,29 +31,26 @@ public class Aluno {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotEmpty
-	@Length(min = 2, max = 100)
-	private String nome;
-	
 	@NotNull
 	@Past
 	@Temporal(value=TemporalType.DATE)
 	private Date dataNascimento;
 	
 	@NotEmpty
+	@Column(unique = true)
 	private String matricula;
 		
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.EAGER)
 	@JoinTable(name="alunos_cursos",
 		joinColumns = @JoinColumn(name="aluno_id"),
 		inverseJoinColumns = @JoinColumn(name="curso_id")
 			)
 	private Set<Curso> cursos;
 	
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario usuario;
 	
-	@OneToMany(cascade = {CascadeType.REMOVE})
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Nota> notas;
 
 	public Integer getId() {
@@ -61,14 +59,6 @@ public class Aluno {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public Date getDataNascimento() {

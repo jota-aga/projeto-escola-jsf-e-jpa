@@ -4,11 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
-
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import modelo.Professor;
+import modelo.Usuario;
 
 public class ProfessorDAO implements Serializable{
 	
@@ -77,5 +78,21 @@ public class ProfessorDAO implements Serializable{
 	public Professor procurarPorId(Integer id) {
 		Professor professor = manager.find(Professor.class, id);
 		return professor;
+	}
+	
+	public Professor procurarPorUsuario(Usuario usuario) {
+		try {
+			String jpql = "select p from Professor p where p.usuario = :usuario";
+			
+			Query q = manager.createQuery(jpql);
+			
+			q.setParameter("usuario", usuario);
+			
+			Professor professor = (Professor) q.getSingleResult();
+			
+			return professor;
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 }

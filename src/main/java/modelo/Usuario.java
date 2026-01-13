@@ -8,20 +8,35 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
-@Table(name="user")
 public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotEmpty
+	private String nome;
+	
+	@CPF
+	@NotEmpty
+	@Column(unique = true)
+	private String cpf;
+	
 	@Column
+	@NotEmpty
 	private String senha;
 	
 	@Enumerated(value=EnumType.STRING)
-	private TipoUsuario tipoUsuario;
+	private TipoDeUsuario tipoDeUsuario;
+	
+	@Transient
+	private String confirmarSenha;
 
 	public Integer getId() {
 		return id;
@@ -39,11 +54,35 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public TipoUsuario getTipoUsuario() {
-		return tipoUsuario;
+	public TipoDeUsuario getTipoDeUsuario() {
+		return tipoDeUsuario;
 	}
 
-	public void setTipoUsuario(TipoUsuario tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
+	public void setTipoDeUsuario(TipoDeUsuario tipoDeUsuario) {
+		this.tipoDeUsuario = tipoDeUsuario;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getConfirmarSenha() {
+		return confirmarSenha;
+	}
+
+	public void setConfirmarSenha(String confirmarSenha) {
+		this.confirmarSenha = confirmarSenha;
 	}
 }

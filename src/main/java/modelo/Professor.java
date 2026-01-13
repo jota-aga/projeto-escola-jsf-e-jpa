@@ -22,20 +22,12 @@ public class Professor {
 	private Integer id;
 	
 	@NotEmpty
-	@Length(min=2, max=100)
-	private String nome;
-	
-	@CPF
-	@NotEmpty
-	private String cpf;
-	
-	@NotEmpty
 	private String formacao;
 		
 	@ManyToOne(optional=true, cascade = CascadeType.MERGE)
 	private Curso curso;
 	
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario usuario;
 
 	public Integer getId() {
@@ -44,22 +36,6 @@ public class Professor {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
 	}
 
 	public String getFormacao() {

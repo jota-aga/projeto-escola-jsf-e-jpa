@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+ 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<p:dialog id="dialog-form-aluno" widgetVar="dialog-form-aluno-widgetvar"  value="#{adminBean.alunos}" closeOnEscape="true" header="Editar Aluno" modal="true" >
+		<p:panelGrid columns="2">
+			<p:outputLabel for="nome" value="Nome: "/>
+			<p:inputText id="nome" value="#{bean.aluno.usuario.nome}" />
+			
+			<p:outputLabel for="dataNascimento" value="Data de Nascimento "/>
+			<p:calendar id="dataNascimento" value="#{bean.aluno.dataNascimento}" />
+			
+			<p:outputLabel for="matricula" value="Matrícula: "/>
+			<p:inputText id="matricula" value="#{bean.aluno.matricula}" />
+			
+			<p:outputLabel value="Cursos: "/>
+			<h:panelGroup>
+				<p:commandButton styleClass="button" value="Cursos"
+				oncomplete="PF('selecionar-cursos-dialog-widgetvar').show()"
+				process="@this" rendered="#{!bean.cursos.isEmpty()}" update="selecionar-cursos-dialog"/>
+				
+			<h:outputText value="Nenhum curso disponível no momento" rendered="#{bean.cursos.isEmpty()}" />
+			</h:panelGroup>
+			
+			<p:outputLabel for="cpf" value="CPF: "/>
+			<p:inputMask id="cpf" mask="999.999.999-99" value="#{bean.aluno.usuario.cpf}"/>
+			
+			<p:outputLabel for="senha" value="Senha: "/>
+			<p:inputText id="senha" value="#{bean.aluno.usuario.senha}" />
+			
+		</p:panelGrid>
+		<p:commandButton value="Salvar" actionListener="#{bean.salvarAluno()}" oncomplete="if ()!args.validationFailed) PF('dialog-form-aluno').hide()"
+				update="dialog-form-aluno data-table-alunos" process="dialog-form-aluno" />
+	</p:dialog>	
+	
+	<ui:include src="/components/dialog/dialog-selecionar-cursos.xhtml">
+		<ui:param name="bean" value="#{bean}"></ui:param>
+	</ui:include>
+</ui:fragment>
