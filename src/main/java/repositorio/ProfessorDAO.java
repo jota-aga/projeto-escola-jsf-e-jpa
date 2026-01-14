@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import modelo.Curso;
 import modelo.Professor;
 import modelo.Usuario;
 
@@ -62,9 +63,9 @@ public class ProfessorDAO implements Serializable{
 		return q.getResultList();
 	}
 	
-	public List<Professor> procurarPorCurso(Integer cursoId){
-		Query q = manager.createQuery("select p from Professor p where p.curso.id = :cursoId", Professor.class);
-		q.setParameter("cursoId", cursoId);
+	public List<Professor> procurarPorCurso(Curso curso){
+		Query q = manager.createQuery("select p from Professor p where p.curso = :curso", Professor.class);
+		q.setParameter("curso", curso);
 		
 		return q.getResultList();
 	}

@@ -33,13 +33,13 @@ public class Curso {
 	@Length(min = 4, max = 80)
 	private String nome;
 	
-	@ManyToMany(mappedBy = "cursos", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "cursos", cascade = CascadeType.MERGE)
 	private Set<Aluno> alunos = new HashSet<>();
 	
-	@OneToMany(mappedBy = "curso")
+	@OneToMany(mappedBy = "curso", cascade = CascadeType.MERGE, orphanRemoval = true)
 	private Set<Professor> professores;
 	
-	@OneToMany(cascade = {CascadeType.REMOVE})
+	@OneToMany(cascade = {CascadeType.REMOVE}, orphanRemoval = true, mappedBy = "curso")
 	private List<Nota> notas;
 
 	public Integer getId() {

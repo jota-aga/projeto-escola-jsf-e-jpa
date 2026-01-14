@@ -67,7 +67,7 @@
 			<h:outputText value="Nenhum curso disponível no momento" rendered="#{authBean.cursos.isEmpty()}" />
 			
 			<p:commandButton styleClass="button-salvar" value="Salvar" actionListener="#{authBean.salvarRegistro()}" process="@form" 
-			update="message-nome message-cpf message-senha message-confirmarSenha message-tipoDeUsuario message-data-nascimento" >
+			update="message-nome message-cpf message-senha message-confirmarSenha message-tipoDeUsuario message-data-nascimento" styleClass="button-salvar">
 				<p:resetInput target="@form"/>
 			</p:commandButton>
 

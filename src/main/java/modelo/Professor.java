@@ -61,4 +61,8 @@ public class Professor {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
+	public TipoDeUsuario getTipoDeUsuario() {
+		return usuario.getTipoDeUsuario();
+	}
 }

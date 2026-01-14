@@ -6,8 +6,9 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
-	<p:dialog id="dialog-form-professor" widgetVar="dialog-form-professor-widgetvar"  value="#{adminBean.professores}" closeOnEscape="true" header="Editar Professor" modal="true" >
-		<p:panelGrid columns="2">
+	<p:dialog id="dialog-form-professor" widgetVar="dialog-form-professor-widgetvar"  value="#{adminBean.professores}" closeOnEscape="true" 
+	header="Editar Professor" modal="true" resizable="false">
+		<p:panelGrid columns="2" >
 			<p:outputLabel for="nome" value="Nome: "/>
 			<p:inputText id="nome" value="#{bean.professor.usuario.nome}" />
 			
@@ -31,7 +32,7 @@
 			
 		</p:panelGrid>
 		<p:commandButton value="Salvar" actionListener="#{bean.salvarProfessor()}" oncomplete="if ()!args.validationFailed) PF('dialog-form-professor').hide()"
-				update="dialog-form-professor data-table-professores" process="dialog-form-professor" />
+				update="dialog-form-professor data-table-professores" process="dialog-form-professor" styleClass="button-salvar"/>
 	</p:dialog>	
 	
 	<ui:include src="/components/dialog/dialog-selecionar-cursos.xhtml">

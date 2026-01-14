@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+ 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<p:commandButton icon="fa fa-plus" actionListener="#{bean.prepararNovoCurso()}" update="dialog-form-curso" process="@this" 
+	oncomplete="PF('dialog-form-curso-widgetvar').show()" >
+		<p:resetInput target="dialog-form-curso"/>
+	</p:commandButton>
+	<p:dataTable id="data-table-cursos" value="#{bean.cursos}" var="curso"
+		emptyMessage="O aluno não possui notas no curso"
+		style="text-align:center; width: 600px">
+
+		<p:column headerText="Nome">
+			<h:outputText value="#{curso.nome}" />
+		</p:column>
+
+		<p:column headerText="Opções">
+			<p:commandButton icon="fa fa-pencil" title="Editar Curso"
+				actionListener="#{bean.prepararEdicaoDeCurso(curso)}"
+				oncomplete="PF('dialog-form-curso-widgetvar').show()"
+				process="@this" update="mainForm:dialog-form-curso">
+				<p:resetInput target="@form:dialog-form-curso" />
+			</p:commandButton>
+			<p:commandButton icon="fa fa-trash" title="Excluir Curso"
+				actionListener="#{bean.excluirCurso(curso)}"
+				update="@form:data-table-cursos @form:messages" process="@this"/>
+		</p:column>
+	</p:dataTable>
+
+	<ui:include src="/components/dialog/formulario/form-curso.xhtml">
+		<ui:param name="bean" value="#{bean}"/>
+	</ui:include>
+</ui:fragment>

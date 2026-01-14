@@ -1,8 +1,6 @@
 package bean;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,9 +13,10 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import modelo.Aluno;
+import modelo.Curso;
 import modelo.Nota;
 import modelo.Professor;
-import modelo.Usuario;
+import modelo.TipoDeUsuario;
 import repositorio.AlunoDAO;
 import repositorio.NotaDAO;
 import service.NotaService;
@@ -27,6 +26,11 @@ import util.AddMessageUtil;
 @ViewScoped
 public class ProfessorBean implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Inject
 	private AlunoDAO alunoDAO;
 	
@@ -45,8 +49,8 @@ public class ProfessorBean implements Serializable{
 	private Aluno aluno;
 	
 	private Nota nota;
-	
-	private Usuario usuario;
+		
+	private Curso curso;
 	
 	
 	@PostConstruct
@@ -57,7 +61,6 @@ public class ProfessorBean implements Serializable{
 		
 		if(usuarioLogado instanceof Professor) {
 			professor = (Professor) usuarioLogado;
-			usuario = professor.getUsuario();
 		}
 		
 		procurarAlunosPorCurso();
@@ -68,6 +71,7 @@ public class ProfessorBean implements Serializable{
 	}
 	
 	public void procurarNotasPorAlunoECurso(Aluno aluno) {
+		this.aluno = aluno;
 		notas = notaDAO.procurarPorCursoEAluno(professor.getCurso(), aluno);
 	}
 	
@@ -85,6 +89,7 @@ public class ProfessorBean implements Serializable{
 	public void salvarNota() {
 		notaService.salvarNota(nota);
 		AddMessageUtil.adicionarMensagemEAtualizar("Nota Editada", "salvarSucessoNota", FacesMessage.SEVERITY_INFO, null, "mainForm:messages");
+		procurarNotasPorAlunoECurso(aluno);
 	}
 	
 	public void excluirNota(Nota nota) {
@@ -126,13 +131,19 @@ public class ProfessorBean implements Serializable{
 		return notas;
 	}
 
-	public String getTipoDeUsuario() {
-		if(usuario != null) {
-			return usuario.getTipoDeUsuario().name();
+	public TipoDeUsuario getTipoDeUsuario() {
+		if(professor != null) {
+			return professor.getTipoDeUsuario();
 		}
 		
 		return null;
 	}
-	
-	
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
 }

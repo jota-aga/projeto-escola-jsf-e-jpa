@@ -5,16 +5,24 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	template="/WEB-INF/template/template.xhtml">
+	template="/WEB-INF/template/template-for-admin.xhtml">
 
-	<ui:define name="titulo">Portal Aluno</ui:define>
+
+
+	<f:metadata>
+		<f:viewAction action="#{adminBean.procurarTodosCursos()}" />
+	</f:metadata>
 	
-	<ui:define name="titulo-cabecalho">Aluno</ui:define>
+	<ui:define name="titulo">Gestão Curso</ui:define>
+	
+	<ui:define name="titulo-cabecalho">Gestão De Cursos</ui:define>
 	
 	<ui:define name="conteudo">
-		<ui:include src="/components/dialog/datatable/data-table-for-alunos.xhtml">
-			<ui:param name="bean" value="#{alunoBean}"/>
+		<p:growl id="messages" showDetail="true" showSummary="true"/>
+		<ui:include src="/components/dialog/datatable/data-table-cursos.xhtml">
+			<ui:param name="bean" value="#{adminBean}"/>
 		</ui:include>
 	</ui:define>
+	
 
 </ui:composition>

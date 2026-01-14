@@ -6,12 +6,12 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
-	<p:dialog id="dialog-form-nota" widgetVar="dialog-form-nota-widgetvar"  closeOnEscape="true" header="Adicionar Nota" modal="true" >
+	<p:dialog id="dialog-form-nota" widgetVar="dialog-form-nota-widgetvar"  closeOnEscape="true" header="Adicionar Nota" modal="true" resizable="false">
 		<p:message id="nota-message" showDetail="true" for="nota"/>
-		<p:panelGrid columns="2">
+		<p:panelGrid columns="2" >
 			<p:outputLabel for="data" value="Data: "/>
 			<p:calendar id="data" pattern="dd/MM/yyyy" mask="99/99/9999" value="#{bean.nota.data}"/>
-		
+			
 			<p:outputLabel for="nota" value="Nota: "/>
 			<p:inputNumber id="nota" decimalPlaces="2" value="#{bean.nota.nota}" />
 			
@@ -24,7 +24,7 @@
 			<p:outputLabel value="Curso: "/>
 			<h:outputText value="#{bean.nota.curso.nome}"/>
 		</p:panelGrid>
-		<p:commandButton value="Salvar" actionListener="#{bean.salvarNota()}" oncomplete="if ()!args.validationFailed) PF('dialog-form-nota').hide()"
-				update="dialog-form-nota " process="mainForm:dialog-form-nota" />
+		<p:commandButton value="Salvar" actionListener="#{bean.salvarNota()}" oncomplete="if (!args.validationFailed) PF('dialog-form-nota-widgetvar').hide()"
+				update="nota-message mainForm:data-table-notas" process="@this mainForm:dialog-form-nota" styleClass="button-salvar"/>
 	</p:dialog>	
 </ui:fragment>

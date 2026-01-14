@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import modelo.Usuario;
 
-@WebFilter(urlPatterns = {"/gerenciar-alunos.xhtml", "/gerenciar-professores.xhtml"})
+@WebFilter(urlPatterns = {"/gerenciar-alunos.xhtml", "/gerenciar-professores.xhtml", "/gerenciar-cursos.xhtml"})
 public class AdminFiltro implements Filter{
 
 	@Override

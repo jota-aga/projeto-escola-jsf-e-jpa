@@ -7,9 +7,14 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
+
+import org.jboss.weld.context.RequestContext;
+import org.omg.CORBA.Request;
 
 import converter.CursoConverter;
 import modelo.Aluno;
@@ -92,6 +97,14 @@ public class AuthBean implements Serializable{
 			return "gerenciar-alunos.xhtml?faces-redirect=true";
 		}
 		return "login.xhtml";
+	}
+	
+	public String logout() {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		
+		session.setAttribute("usuario", null);
+		
+		return "login.xhtml?faces-redirect=true";
 	}
 	
 	public void procurarTodosOsCursos() {

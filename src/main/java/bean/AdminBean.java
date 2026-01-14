@@ -15,11 +15,13 @@ import javax.servlet.http.HttpSession;
 import modelo.Aluno;
 import modelo.Curso;
 import modelo.Professor;
+import modelo.TipoDeUsuario;
 import modelo.Usuario;
 import repositorio.AlunoDAO;
 import repositorio.CursoDAO;
 import repositorio.ProfessorDAO;
 import service.AlunoService;
+import service.CursoService;
 import service.ProfessorService;
 import util.AddMessageUtil;
 
@@ -41,6 +43,9 @@ public class AdminBean implements Serializable{
 	
 	@Inject
 	private ProfessorService professorService;
+	
+	@Inject
+	private CursoService cursoService;
 	
 	private Aluno aluno;
 	
@@ -99,8 +104,24 @@ public class AdminBean implements Serializable{
 		cursos = cursoDAO.procurarTodos();
 	}
 	
-	public void prepararEdicaoCurso(Curso curso) {
+	public void prepararNovoCurso() {
+		curso = new Curso();
+	}
+	
+	public void prepararEdicaoDeCurso(Curso curso) {
 		this.curso = curso;
+	}
+	
+	public void salvarCurso() {
+		cursoService.salvarCurso(curso);
+		AddMessageUtil.adicionarMensagemEAtualizar("Curso Salvo", "salvarSucessoCurso", FacesMessage.SEVERITY_INFO, null, "messages");
+		procurarTodosCursos();
+	}
+	
+	public void excluirCurso(Curso curso) {
+		cursoService.excluirCurso(curso);
+		AddMessageUtil.adicionarMensagem("Curso Excluido", "excluirSucessoCurso", FacesMessage.SEVERITY_INFO, null);
+		procurarTodosCursos();
 	}
 	
 	public void prepararEdicaoProfessor(Professor professor) {
@@ -205,9 +226,9 @@ public class AdminBean implements Serializable{
 		return editandoAluno;
 	}
 	
-	public String getTipoDeUsuario() {
+	public TipoDeUsuario getTipoDeUsuario() {
 		if(usuario != null) {
-			return usuario.getTipoDeUsuario().name();
+			return usuario.getTipoDeUsuario();
 		}
 		return null;
 	}

@@ -10,8 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table
@@ -21,7 +22,8 @@ public class Nota {
 	private Integer id;
 	
 	@NotNull
-	@Size(min = 0, max = 10)
+	@Min(value = 0)
+	@Max(value = 10)
 	private Double nota;
 	
 	private String descricao;

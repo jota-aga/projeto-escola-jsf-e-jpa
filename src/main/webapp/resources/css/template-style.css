@@ -1,0 +1,41 @@
+*{
+	margin: 0;
+}
+
+body{
+	text-align: center;
+	color: white;
+	margin: 0;
+	
+}
+
+body header{
+	padding-bottom: 30px;
+	background-color: #9CF09B;
+}
+
+h1{
+	padding-top: 30px;
+}
+
+a{
+	color: #04d90f;
+	margin-right: 10px;
+}
+
+#mainForm .ui-datatable{
+	display:flex;
+	margin: 30px auto 0 auto;
+}
+
+.button-salvar{
+	margin-top: 10px;
+}
+
+.button-logout{
+	margin-top: 10px;
+}
+
+.ui-inputfield{
+	padding: 4px 10px 4px 10px;
+}

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import modelo.Aluno;
 import modelo.Curso;
 import modelo.Nota;
+import modelo.TipoDeUsuario;
 import service.AlunoService;
 
 @Named
@@ -59,9 +60,9 @@ public class AlunoBean implements Serializable{
 		this.aluno = aluno;
 	}
 	
-	public String getTipoDeUsuario() {
+	public TipoDeUsuario getTipoDeUsuario() {
 		if(aluno != null) {
-			return aluno.getUsuario().getTipoDeUsuario().name();
+			return aluno.getTipoDeUsuario();
 		}
 		return null;
 		

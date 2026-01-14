@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+ 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/template/template-for-admin.xhtml">
+	
+<f:view locale="#{localeBean.currentLocale}">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="css" name="template-style.css"/>
+	<ui:insert name="head"></ui:insert>
+	<title> <ui:insert name="titulo"/></title>
+</h:head>
+
+<h:body>
+	<header>
+		<h1><ui:insert name="titulo-cabecalho"/></h1>
+		<h:form>
+			<h:link value="Alunos" outcome="gerenciar-alunos"/>
+			<h:link value="Professores" outcome="gerenciar-professores"/>
+			<h:link value="Cursos" outcome="gerenciar-cursos"/>
+			<h:link value="Relatório" outcome="relatorio"/>
+			<br/>
+			<p:commandButton action="#{authBean.logout}" value="Logout" process="@this" styleClass="button-logout"/>
+		</h:form>
+	</header>
+	
+	<div>
+		<h:form id="mainForm">
+			<ui:insert name="conteudo"></ui:insert>
+		</h:form>
+	</div>
+
+</h:body>
+</f:view>
+</html>
