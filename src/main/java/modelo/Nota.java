@@ -1,6 +1,6 @@
 package modelo;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table
@@ -20,11 +21,13 @@ public class Nota {
 	private Integer id;
 	
 	@NotNull
+	@Size(min = 0, max = 10)
 	private Double nota;
 	
 	private String descricao;
-
-	private LocalDate data;
+	
+	@Temporal(value = TemporalType.DATE)
+	private Date data;
 	
 	@ManyToOne	
 	private Curso curso;
@@ -72,11 +75,11 @@ public class Nota {
 		this.descricao = descricao;
 	}
 
-	public LocalDate getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(LocalDate data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 	

@@ -7,9 +7,18 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
 	<p:dialog id="dialog-notas" widgetVar="dialog-notas-widgetvar" header="Notas" resizable="false" modal="true" closeOnEscape="true">
-		<p:dataTable id="data-table-notas" value="#{bean.notas}" var="nota" emptyMessage="O aluno não possui notas no curso" style="text-align:center; width: 300px">
+		<p:dataTable id="data-table-notas" value="#{bean.notas}" var="nota" emptyMessage="O aluno não possui notas no curso" 
+		style="text-align:center; width: 600px">
+			<p:column headerText="Data">
+				<h:outputText value="#{nota.data}"/>
+			</p:column>
+			
 			<p:column headerText="Nota">
 				<h:outputText value="#{nota.nota}"/>
+			</p:column>
+			
+			<p:column headerText="Descrição">
+				<h:outputText value="#{nota.descricao}"/>
 			</p:column>
 			
 			<p:column headerText="Opções" rendered="#{bean.tipoDeUsuario eq 'PROFESSOR'}">

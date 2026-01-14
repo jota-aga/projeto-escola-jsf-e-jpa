@@ -31,7 +31,7 @@
 				<p:resetInput target="@form:dialog-form-aluno"/>
 			</p:commandButton>
 			
-			<p:commandButton icon="fa fa-trash" actionListener="#{bean.excluirAluno(aluno)}" process="@this" update="@form:data-table-alunos" 
+			<p:commandButton icon="fa fa-trash" actionListener="#{bean.excluirAluno(aluno)}" process="@this" update="@form:data-table-alunos @form:dialog-form-nota" 
 			rendered="#{bean.tipoDeUsuario eq 'ADMIN'}"/>
 			
 			<p:commandButton value="Adicionar Nota" rendered="#{bean.tipoDeUsuario eq 'PROFESSOR'}" 

@@ -1,6 +1,9 @@
 package bean;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -72,6 +75,7 @@ public class ProfessorBean implements Serializable{
 		nota = new Nota();
 		nota.setAluno(aluno);
 		nota.setCurso(professor.getCurso());
+		nota.setData(new Date());
 	}
 	
 	public void prepararEdicaoDeNota(Nota nota) {
