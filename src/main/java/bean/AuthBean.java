@@ -70,7 +70,7 @@ public class AuthBean implements Serializable{
 		cursosSelecionados = new ArrayList<>();
 	}
 	
-	public void salvarRegistro() {
+	public String salvarRegistro() {
 		boolean isUsuarioSalvoComSucesso = authService.salvarRegistro(usuario, aluno, professor, cursosSelecionados, cursoSelecionado);
 		
 		if(isUsuarioSalvoComSucesso) {
@@ -80,8 +80,10 @@ public class AuthBean implements Serializable{
 			else {
 				AddMessageUtil.adicionarMensagemEAtualizar("Professor Salvo", "salvarSucessoProfessor", FacesMessage.SEVERITY_INFO, null, "mainForm:messages");
 			}
+			
+			return "login.xhtml?faces-redirect=true";
 		}
-		
+		return "registro?faces-redirect=true";
 	}
 	
 	public String fazerLogin() {
@@ -137,7 +139,8 @@ public class AuthBean implements Serializable{
 	}
 	
 	public TipoDeUsuario[] getTiposDeUsuario() {
-		return TipoDeUsuario.values();
+		TipoDeUsuario[] tiposDeUsuario = {TipoDeUsuario.ALUNO, TipoDeUsuario.PROFESSOR};
+		return tiposDeUsuario;
 	}
 
 	public String getConfirmarSenha() {
