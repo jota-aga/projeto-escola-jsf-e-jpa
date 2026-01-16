@@ -9,7 +9,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,6 +31,9 @@ public class Curso {
 	@NotEmpty
 	@Length(min = 4, max = 80)
 	private String nome;
+	
+	@NotEmpty
+	private String cor;
 	
 	@ManyToMany(mappedBy = "cursos", cascade = CascadeType.MERGE)
 	private Set<Aluno> alunos = new HashSet<>();
@@ -76,6 +78,14 @@ public class Curso {
 
 	public void setProfessores(Set<Professor> professores) {
 		this.professores = professores;
+	}
+
+	public String getCor() {
+		return cor;
+	}
+
+	public void setCor(String cor) {
+		this.cor = cor;
 	}
 
 	@Override

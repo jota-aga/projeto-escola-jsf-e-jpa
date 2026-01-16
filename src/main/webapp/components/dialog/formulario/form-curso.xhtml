@@ -7,13 +7,16 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
 	<p:dialog id="dialog-form-curso" widgetVar="dialog-form-curso-widgetvar"  closeOnEscape="true" header="Adicionar Curso" modal="true" resizable="false">
-		<p:message id="nome-message" showDetail="true" for="nome"/>
+		<p:messages id="curso-messages"/>
 		<p:panelGrid columns="2" >
 			<p:outputLabel for="nome" value="Nome: "/>
-			<p:inputText id="nome" value="#{bean.curso.nome}"/>
+			<p:inputText id="nome" value="#{bean.curso.nome}" required="true"/>
+			
+			<p:outputLabel for="cor" value="Cor: "/>
+			<p:colorPicker id="cor" value="#{bean.curso.cor}" required="true"/>
 		
 		</p:panelGrid>
 		<p:commandButton value="Salvar" actionListener="#{bean.salvarCurso()}" oncomplete="if (!args.validationFailed) PF('dialog-form-curso-widgetvar').hide()"
-				update="dialog-form-curso @form:data-table-cursos" process="mainForm:dialog-form-curso" styleClass="button-salvar"/>
+				update="dialog-form-curso @form:data-table-cursos curso-messages" process="mainForm:dialog-form-curso" styleClass="button-salvar"/>
 	</p:dialog>	
 </ui:fragment>
