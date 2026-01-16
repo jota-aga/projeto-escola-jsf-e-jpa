@@ -89,14 +89,24 @@ public class ProfessorBean implements Serializable{
 	public void salvarNota() {
 		notaService.salvarNota(nota);
 		AddMessageUtil.adicionarMensagemEAtualizar("Nota Editada", "salvarSucessoNota", FacesMessage.SEVERITY_INFO, null, "mainForm:messages");
-		procurarNotasPorAlunoECurso(aluno);
+		adicionarNotaNaLista(nota);
 	}
 	
 	public void excluirNota(Nota nota) {
 		notaService.excluirNota(nota);
 		
 		AddMessageUtil.adicionarMensagemEAtualizar("Nota Excluida", "excluirSucessoNota", FacesMessage.SEVERITY_INFO, null, "mainForm:messages");
-		procurarNotasPorAlunoECurso(aluno);
+		notas.remove(nota);
+	}
+	
+	private void adicionarNotaNaLista(Nota nota) {
+		if(notas.contains(nota)) {
+			int index = notas.indexOf(nota);
+			notas.set(index, nota);
+		}
+		else {
+			notas.add(0, nota);
+		}
 	}
 
 	public Professor getProfessor() {

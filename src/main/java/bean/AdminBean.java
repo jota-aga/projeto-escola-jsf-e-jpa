@@ -78,10 +78,6 @@ public class AdminBean implements Serializable{
 		if(usuarioLogado instanceof Usuario) {
 			usuario = (Usuario) usuarioLogado;
 		}
-		
-		if (usuario == null) {
-			System.out.println("================== USUARIO VAZIO");
-		}
 	}
 	
 	public void procurarTodosAlunos() {
@@ -114,14 +110,14 @@ public class AdminBean implements Serializable{
 	
 	public void salvarCurso() {
 		cursoService.salvarCurso(curso);
-		AddMessageUtil.adicionarMensagemEAtualizar("Curso Salvo", "salvarSucessoCurso", FacesMessage.SEVERITY_INFO, null, "messages");
-		procurarTodosCursos();
+		AddMessageUtil.adicionarMensagemEAtualizar("Curso Salvo", "salvarSucessoCurso", FacesMessage.SEVERITY_INFO, null, "mainForm:messages");
+		adicionarCursoNaLista(curso);
 	}
 	
 	public void excluirCurso(Curso curso) {
 		cursoService.excluirCurso(curso);
 		AddMessageUtil.adicionarMensagem("Curso Excluido", "excluirSucessoCurso", FacesMessage.SEVERITY_INFO, null);
-		procurarTodosCursos();
+		cursos.remove(curso);
 	}
 	
 	public void prepararEdicaoProfessor(Professor professor) {
@@ -134,32 +130,62 @@ public class AdminBean implements Serializable{
 	
 	public void salvarAluno() {
 		boolean salvocomSucesso = alunoService.salvarAluno(aluno, cursosSelecionados);
-		procurarTodosAlunos();
 		
 		if(salvocomSucesso) {
-			AddMessageUtil.adicionarMensagemEAtualizar("Aluno Salvo", "salvarSucessoAluno", FacesMessage.SEVERITY_INFO, null, "messages");
+			AddMessageUtil.adicionarMensagemEAtualizar("Aluno Salvo", "salvarSucessoAluno", FacesMessage.SEVERITY_INFO, null, "mainForm:messages");
+			adicionarAlunoNaLista(aluno);
 		}
 	}
 	
 	public void excluirAluno(Aluno aluno) {
 		alunoService.excluirAluno(aluno);
 		AddMessageUtil.adicionarMensagemEAtualizar("Aluno Excluído", "excluirSucessoAluno", FacesMessage.SEVERITY_INFO, null, "mainForm:messages");
-		procurarTodosAlunos();
+		alunos.remove(aluno);
 	}
 	
 	public void salvarProfessor() {
 		boolean salvocomSucesso = professorService.salvarProfessor(professor, cursoSelecionado);
-		procurarTodosProfessores();
 		
 		if(salvocomSucesso) {
 			AddMessageUtil.adicionarMensagemEAtualizar("Professor Salvo", "salvarSucessoProfessor", FacesMessage.SEVERITY_INFO, null, "messages");
+			adicionarProfessorNaLista(professor);
 		}
 	}
 	
 	public void excluirProfessor(Professor professor) {
 		professorService.excluirProfessor(professor);
 		AddMessageUtil.adicionarMensagemEAtualizar("professor Excluído", "excluirSucessoProfessor", FacesMessage.SEVERITY_INFO, null, "mainForm:messages");
-		procurarTodosProfessores();
+		professores.remove(professor);
+	}
+	
+	private void adicionarProfessorNaLista(Professor professor) {
+		if(professores.contains(professor)) {
+			int index = professores.indexOf(professor);
+			professores.set(index, professor);
+		}
+		else {
+			professores.add(0, professor);
+		}
+	}
+	
+	private void adicionarAlunoNaLista(Aluno aluno) {
+		if(alunos.contains(aluno)) {
+			int index = alunos.indexOf(aluno);
+			alunos.set(index, aluno);
+		}
+		else {
+			alunos.add(0, aluno);
+		}
+	}
+	
+	private void adicionarCursoNaLista(Curso curso) {
+		if(cursos.contains(curso)) {
+			int index = cursos.indexOf(curso);
+			cursos.set(index, curso);
+		}
+		else {
+			cursos.add(0, curso);
+		}
 	}
 
 	public Aluno getAluno() {
