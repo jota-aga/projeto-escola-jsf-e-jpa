@@ -14,7 +14,7 @@
     google.charts.load("current", {packages:['corechart']});
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
-      var data = google.visualization.arrayToDataTable(#{relatorioBean.graficoDTO.jsonDoGraficoDeProfessorPorCurso});
+      var data = google.visualization.arrayToDataTable(#{relatorioBean.graficoBarraCursoDTO.jsonDoGraficoDeProfessorPorCurso});
 
       var view = new google.visualization.DataView(data);
       view.setColumns([0, 1,
@@ -44,10 +44,11 @@
 
       function drawChart() {
 
-        var data = google.visualization.arrayToDataTable(#{relatorioBean.graficoDTO.jsonDoGraficoDeAlunoPorCurso});
+        var data = google.visualization.arrayToDataTable(#{relatorioBean.graficoPizzaCursoDTO.jsonDoGraficoDeAlunoPorCurso});
 
         var options = {
-          title: 'My Daily Activities'
+          title: 'Alunos Por Curso',
+          colors: #{relatorioBean.graficoPizzaCursoDTO.jsonParaCoresDosCursos}
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));

@@ -8,7 +8,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dto.GraficoDTO;
+import dto.GraficoBarraCurso;
+import dto.GraficoPizzaCurso;
 import modelo.Aluno;
 import modelo.Professor;
 import repositorio.AlunoDAO;
@@ -23,7 +24,8 @@ public class RelatorioBean implements Serializable{
 	@Inject
 	ProfessorDAO professorDAO;
 	
-	private GraficoDTO graficoDTO;
+	private GraficoPizzaCurso graficoPizzaCursoDTO;
+	private GraficoBarraCurso graficoBarraCursoDTO;
 	
 	@PostConstruct
 	public void init() {
@@ -31,11 +33,22 @@ public class RelatorioBean implements Serializable{
 		
 		List<Aluno> alunos = alunoDAO.procurarTodos();
 		
-		graficoDTO = new GraficoDTO();
-		graficoDTO.popularGraficos(professores, alunos);
+		graficoPizzaCursoDTO = new GraficoPizzaCurso();
+		graficoBarraCursoDTO = new GraficoBarraCurso();
+		
+		preencherGraficos(professores, alunos);
+	}
+	
+	public void preencherGraficos(List<Professor> professores, List<Aluno> alunos) {
+		graficoBarraCursoDTO.preencherDadosDoGraficoDeProfessorPorCurso(professores);
+		graficoPizzaCursoDTO.preencherDadosDoGraficoDeAlunoPorCurso(alunos);
 	}
 
-	public GraficoDTO getGraficoDTO() {
-		return graficoDTO;
+	public GraficoPizzaCurso getGraficoPizzaCursoDTO() {
+		return graficoPizzaCursoDTO;
+	}
+
+	public GraficoBarraCurso getGraficoBarraCursoDTO() {
+		return graficoBarraCursoDTO;
 	}
 }
