@@ -10,7 +10,9 @@
 		<p:dataTable id="data-table-notas" value="#{bean.notas}" var="nota" emptyMessage="O aluno não possui notas no curso" 
 		style="text-align:center; width: 600px">
 			<p:column headerText="Data">
-				<h:outputText value="#{nota.data}"/>
+				<h:outputText value="#{nota.data}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
 			</p:column>
 			
 			<p:column headerText="Nota">
