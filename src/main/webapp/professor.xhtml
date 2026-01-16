@@ -12,15 +12,15 @@
 	<ui:define name="titulo-cabecalho">Professor</ui:define>
 	
 	<ui:define name="conteudo">
-		<ui:include src="/components/dialog/datatable/data-table-alunos.xhtml">
+		<ui:include src="/components/datatable/data-table-alunos.xhtml">
 			<ui:param name="bean" value="#{professorBean}"/>
 		</ui:include>
 
-		<ui:include src="/components/dialog/formulario/form-nota.xhtml">
+		<ui:include src="/components/formulario/form-nota.xhtml">
 			<ui:param name="bean" value="#{professorBean}" />
 		</ui:include>
 		
-		<ui:include src="/components/dialog/datatable/data-table-notas.xhtml">
+		<ui:include src="/components/datatable/data-table-notas.xhtml">
 			<ui:param name="bean" value="#{professorBean}"/>
 		</ui:include>
 	</ui:define>

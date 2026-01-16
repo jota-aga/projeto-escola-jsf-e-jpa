@@ -21,11 +21,11 @@
 	<ui:define name="titulo-cabecalho">Gestão De Alunos</ui:define>
 
 	<ui:define name="conteudo">
-		<ui:include src="/components/dialog/datatable/data-table-alunos.xhtml">
+		<ui:include src="/components/datatable/data-table-alunos.xhtml">
 			<ui:param name="bean" value="#{adminBean}" />
 		</ui:include>
 
-		<ui:include src="/components/dialog/formulario/form-aluno.xhtml">
+		<ui:include src="/components/formulario/form-aluno.xhtml">
 			<ui:param name="bean" value="#{adminBean}" />
 		</ui:include>
 	</ui:define>
