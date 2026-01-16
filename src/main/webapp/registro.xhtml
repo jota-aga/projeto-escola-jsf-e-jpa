@@ -1,81 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<h:outputStylesheet library="css" name="auth-style.css" />
-</h:head>
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/WEB-INF/template/template-for-auth.xhtml">
 
-<h:body>
-	<p:link href="login.xhtml">Sign In</p:link>
-	<h:form id="mainForm" styleClass="formulario-principal">
-		<p:growl showDetail="true" showSummary="true" id="messages"/>
-		<h1>Sign Up</h1>
-		<p:panelGrid columns="1" styleClass="ui-panelgrid-blank panel-grid"
-			columnClasses="label-col,input-col">
-			
-			<p:message  id="message-tipoDeUsuario" for="tipoDeUsuario" showDetail="true"/>
-			<p:outputLabel value="Tipo de Usuário:" for="tipoDeUsuario" />
-			<p:selectOneRadio id="tipoDeUsuario"
-				value="#{authBean.usuario.tipoDeUsuario}" >
-				<f:selectItems value="#{authBean.tiposDeUsuario}" var="tipo"
-					itemLabel="#{tipo.tipo}" itemValue="#{tipo}" />
-				<p:ajax update="@form:panel-professor @form:panel-aluno" process="@this" />
-			</p:selectOneRadio>
-			
-			<p:message  id="message-nome" for="nome" showDetail="true"/>
-			<p:inputText id="nome" value="#{authBean.usuario.nome}"
-				placeholder="Nome" />
-			
-			<p:message  id="message-cpf" for="cpf" showDetail="true"/>
-			<p:inputMask id="cpf" mask="999.999.999-99"
-				value="#{authBean.usuario.cpf}" placeholder="000.000.000-00" />
-			
-			<p:message  id="message-senha" for="senha" showDetail="true"/>
-			<p:password id="senha" value="#{authBean.usuario.senha}"
-				placeholder="Senha" />
-			
-			<p:message  id="message-confirmarSenha" for="confirmarSenha" showDetail="true"/>
-			<p:password id="confirmarSenha" value="#{authBean.usuario.confirmarSenha}" placeholder="Confirmar Senha"/>
+	<ui:param name="titulo" value="Sign Up" />
+	<ui:param name="link" value="login.xhtml" />
+	<ui:param name="nomeLink" value="Sign In" />
+	<ui:param name="tituloForm" value="Sign Up" />
 
-			<h:panelGroup id="panel-professor">
-				<p:inputText id="formacao" value="#{authBean.professor.formacao}"
-					placeholder="Formação" rendered="#{authBean.tipoProfessor}"/>
-			</h:panelGroup>
-			
-			<h:panelGroup id="panel-aluno">
-				<h:panelGroup rendered="#{authBean.tipoAluno}">
-					<p:message  id="message-matricula" for="matricula" showDetail="true"/>
-					<p:inputText id="matricula" value="#{authBean.aluno.matricula}"
-						placeholder="Matrícula" />
-				
-				
-					<p:message  id="message-data-nascimento" for="dataNascimento" showDetail="true" showSummary="true"/>
-					<p:calendar id="dataNascimento" value="#{authBean.aluno.dataNascimento}" placeholder="Data de Nascimento" mask="99/99/9999"/>
-				</h:panelGroup>
-			</h:panelGroup>
-			
-			<p:outputLabel value="#{authBean.tipoProfessor? 'Curso:' : 'Cursos:'}"/>
+	<ui:define name="conteudo">
+		<ui:include src="/components/formulario/form-registro.xhtml" />
 
-			<p:commandButton styleClass="button" value="#{authBean.tipoProfessor? 'Selecionar Curso' : 'Selecionar Cursos'}"
-				oncomplete="PF('selecionar-cursos-dialog-widgetvar').show()"
-				process="@this" rendered="#{!authBean.cursos.isEmpty()}" />
-				
-			<h:outputText value="Nenhum curso disponível no momento" rendered="#{authBean.cursos.isEmpty()}" />
-			
-			<p:commandButton value="Salvar" action="#{authBean.salvarRegistro()}" process="@form" 
-			update="message-nome message-cpf message-senha message-confirmarSenha message-tipoDeUsuario message-data-nascimento" styleClass="button-salvar">
-				<p:resetInput target="@form"/>
-			</p:commandButton>
+		<ui:include src="/components/dialog/dialog-selecionar-cursos.xhtml">
+			<ui:param name="bean" value="#{authBean}" />
+		</ui:include>
+	</ui:define>
 
-			<ui:include src="/components/dialog/dialog-selecionar-cursos.xhtml">
-				<ui:param name="bean" value="#{authBean}" />
-			</ui:include>
-		</p:panelGrid>
-	</h:form>
-</h:body>
-</html>
+</ui:composition>
