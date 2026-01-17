@@ -13,7 +13,7 @@
 		<p:inputMask id="cpf" mask="999.999.999-99" value="#{authBean.cpf}"
 			placeholder="000.000.000-00" />
 
-		<p:password id="senha" value="#{authBean.senha}" placeholder="Senha" />
+		<p:password id="senha" value="#{authBean.senha}" placeholder="#{key.senha}" />
 
 		<p:commandButton styleClass="button-salvar" value="Login"
 			action="#{authBean.fazerLogin()}" process="@form" update="@form">

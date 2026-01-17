@@ -7,12 +7,12 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	template="/WEB-INF/template/template.xhtml">
 
-	<ui:define name="titulo">Portal Aluno</ui:define>
+	<ui:define name="titulo">#{key.tituloDaPaginaAluno}</ui:define>
 	
-	<ui:define name="titulo-cabecalho">Aluno</ui:define>
+	<ui:define name="titulo-cabecalho">#{key.aluno}</ui:define>
 	
 	<ui:define name="conteudo">
-		<ui:include src="/components/dialog/datatable/data-table-for-alunos.xhtml">
+		<ui:include src="/components/datatable/data-table-for-alunos.xhtml">
 			<ui:param name="bean" value="#{alunoBean}"/>
 		</ui:include>
 	</ui:define>

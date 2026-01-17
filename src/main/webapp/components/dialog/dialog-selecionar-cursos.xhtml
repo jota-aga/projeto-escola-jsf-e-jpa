@@ -6,14 +6,14 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" >
 	
-	<p:dialog id="selecionar-cursos-dialog" widgetVar="selecionar-cursos-dialog-widgetvar" header="Selecionar Cursos" 
+	<p:dialog id="selecionar-cursos-dialog" widgetVar="selecionar-cursos-dialog-widgetvar" header="#{key.selecionarCursos}" 
 	modal="true" resizable="false" width="500" style="text-align:center">
 		<p:dataTable value="#{bean.cursos}" var="curso" rowKey="#{curso.id}"  selection="#{bean.cursosSelecionados}" 
 		style="margin-bottom: 20px" rowSelectMode="add" rendered="#{bean.tipoAluno}">
 			
 			<p:column  selectionMode="multiple" style="width: 50px"/>
 			
-			<p:column headerText="Nome">
+			<p:column headerText="#{key.nome}">
 				<h:outputText value="#{curso.nome}"/>
 			</p:column>
 		</p:dataTable>
@@ -23,7 +23,7 @@
 			
 			<p:column  selectionMode="single" style="width: 50px"/>
 			
-			<p:column headerText="Nome">
+			<p:column headerText="#{key.nome}">
 				<h:outputText value="#{curso.nome}"/>
 			</p:column>
 		</p:dataTable>

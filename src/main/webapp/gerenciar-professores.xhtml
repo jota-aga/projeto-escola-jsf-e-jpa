@@ -12,9 +12,9 @@
 		<f:viewAction action="#{adminBean.procurarTodosProfessores()}" />
 	</f:metadata>
 	
-	<ui:define name="titulo">Gestão Professor</ui:define>
+	<ui:define name="titulo">#{key.tituloDaPaginaGerenciarProfessor}</ui:define>
 	
-	<ui:define name="titulo-cabecalho">Gestão De Professores</ui:define>
+	<ui:define name="titulo-cabecalho">#{key.tituloDaPaginaGerenciarProfessor}</ui:define>
 	
 	<ui:define name="conteudo">
 		<ui:include src="/components/datatable/data-table-professores.xhtml">

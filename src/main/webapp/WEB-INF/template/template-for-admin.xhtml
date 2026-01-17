@@ -7,34 +7,33 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	template="/WEB-INF/template/template-for-admin.xhtml">
 	
-<f:view locale="#{localeBean.currentLocale}">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<h:outputStylesheet library="css" name="template-style.css"/>
-	<ui:insert name="head"></ui:insert>
-	<title> <ui:insert name="titulo"/></title>
-</h:head>
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<h:outputStylesheet library="css" name="template-style.css"/>
+		<ui:insert name="head"></ui:insert>
+		<title> <ui:insert name="titulo"/></title>
+	</h:head>
 
-<h:body>
-	<header>
-		<h1><ui:insert name="titulo-cabecalho"/></h1>
-		<h:form>
-			<h:link value="Alunos" outcome="gerenciar-alunos"/>
-			<h:link value="Professores" outcome="gerenciar-professores"/>
-			<h:link value="Cursos" outcome="gerenciar-cursos"/>
-			<h:link value="Relatório" outcome="relatorio"/>
-			<br/>
-			<p:commandButton action="#{authBean.logout}" value="Logout" process="@this" styleClass="button-logout"/>
-		</h:form>
-	</header>
+	<h:body>
+		<header>
+			<h1><ui:insert name="titulo-cabecalho"/></h1>
+			<h:form>
+				<h:link value="#{key.alunos}" outcome="gerenciar-alunos"/>
+				<h:link value="#{key.professores}" outcome="gerenciar-professores"/>
+				<h:link value="#{key.cursos}" outcome="gerenciar-cursos"/>
+				<h:link value="#{key.relatorio}" outcome="relatorio"/>
+				<ui:include src="/components/select-locale.xhtml"/>
+				<br/>
+				<p:commandButton action="#{authBean.logout}" value="Logout" process="@this" styleClass="button-logout"/>
+			</h:form>
+		</header>
+		
+		<div>
+			<h:form id="mainForm">
+				<p:growl id="messages" showSummary="true" showDetail="true"/>
+				<ui:insert name="conteudo"></ui:insert>
+			</h:form>
+		</div>
 	
-	<div>
-		<h:form id="mainForm">
-			<p:growl id="messages" showSummary="true" showDetail="true"/>
-			<ui:insert name="conteudo"></ui:insert>
-		</h:form>
-	</div>
-
-</h:body>
-</f:view>
+	</h:body>
 </html>

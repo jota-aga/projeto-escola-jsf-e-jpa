@@ -7,7 +7,6 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	template="/WEB-INF/template/template-for-admin.xhtml">
 	
-<f:view locale="#{localeBean.currentLocale}">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<h:outputStylesheet library="css" name="auth-style.css"/>
@@ -17,6 +16,7 @@
 <h:body>
 	
 		<p:link href="#{link}">#{nomeLink}</p:link>
+		<ui:include src="/components/select-locale.xhtml"/>
 		<h:form id="mainForm" styleClass="formulario-principal">
 			<h1>#{tituloForm}</h1>
 			<p:growl id="messages" showSummary="true" showDetail="true"/>
@@ -25,5 +25,4 @@
 	
 
 </h:body>
-</f:view>
 </html>

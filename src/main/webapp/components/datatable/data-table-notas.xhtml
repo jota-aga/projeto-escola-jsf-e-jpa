@@ -6,24 +6,24 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
-	<p:dialog id="dialog-notas" widgetVar="dialog-notas-widgetvar" header="Notas" resizable="false" modal="true" closeOnEscape="true">
-		<p:dataTable id="data-table-notas" value="#{bean.notas}" var="nota" emptyMessage="O aluno não possui notas no curso" 
+	<p:dialog id="dialog-notas" widgetVar="dialog-notas-widgetvar" header="#{key.notas}" resizable="false" modal="true" closeOnEscape="true">
+		<p:dataTable id="data-table-notas" value="#{bean.notas}" var="nota" emptyMessage="#{key.tabelaVaziaNotasDoAluno}" 
 		style="text-align:center; width: 600px">
-			<p:column headerText="Data">
+			<p:column headerText="#{key.data}">
 				<h:outputText value="#{nota.data}">
 					<f:convertDateTime pattern="dd/MM/yyyy"/>
 				</h:outputText>
 			</p:column>
 			
-			<p:column headerText="Nota">
+			<p:column headerText="#{key.nota}">
 				<h:outputText value="#{nota.nota}"/>
 			</p:column>
 			
-			<p:column headerText="Descrição">
+			<p:column headerText="#{key.descricao}">
 				<h:outputText value="#{nota.descricao}"/>
 			</p:column>
 			
-			<p:column headerText="Opções" rendered="#{bean.tipoDeUsuario.name() eq 'PROFESSOR'}">
+			<p:column headerText="#{key.opcoes}" rendered="#{bean.tipoDeUsuario.name() eq 'PROFESSOR'}">
 				<p:commandButton icon="fa fa-pencil" title="Editar Nota" actionListener="#{bean.prepararEdicaoDeNota(nota)}" 
 				oncomplete="PF('dialog-form-nota-widgetvar').show()" process="@this" update="mainForm:dialog-form-nota" >
 					<p:resetInput target="@form:dialog-form-nota"/>

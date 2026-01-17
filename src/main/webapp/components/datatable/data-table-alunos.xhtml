@@ -6,9 +6,9 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
-	<p:dataTable id="data-table-alunos" value="#{bean.alunos}" var="aluno" rowKey="#{aluno.id}" emptyMessage="Nenhum aluno cadastrado" 
+	<p:dataTable id="data-table-alunos" value="#{bean.alunos}" var="aluno" rowKey="#{aluno.id}" emptyMessage="#{key.tabelaVaziaAluno}" 
 	style="text-align:center; width: 1000px">
-		<p:column headerText="Nome">
+		<p:column headerText="#{key.nome}">
 			<h:outputText value="#{aluno.usuario.nome}"/>
 		</p:column>
 		
@@ -16,17 +16,17 @@
 			<h:outputText value="#{aluno.usuario.cpf}"/>
 		</p:column>
 		
-		<p:column headerText="Matrícula">
+		<p:column headerText="#{key.matricula}">
 			<h:outputText value="#{aluno.matricula}"/>
 		</p:column>
 		
-		<p:column headerText="Data de Nascimento">
+		<p:column headerText="#{key.dataNascimento}">
 			<h:outputText value="#{aluno.dataNascimento}">
 				<f:convertDateTime pattern="dd/MM/yyyy"/>
 			</h:outputText>
 		</p:column>
 		
-		<p:column headerText="Opções">
+		<p:column headerText="#{key.opcoes}">
 			<p:commandButton icon="fa fa-pencil" actionListener="#{bean.prepararEdicaoAluno(aluno)}" 
 			oncomplete="PF('dialog-form-aluno-widgetvar').show()" process="@this" update="@form:data-table-alunos @form:dialog-form-aluno" 
 			rendered="#{bean.tipoDeUsuario.name() eq 'ADMIN'}" >
@@ -36,7 +36,7 @@
 			<p:commandButton icon="fa fa-trash" actionListener="#{bean.excluirAluno(aluno)}" process="@this" update="@form:data-table-alunos" 
 			rendered="#{bean.tipoDeUsuario.name() eq 'ADMIN'}"/>
 			
-			<p:commandButton value="Adicionar Nota" rendered="#{bean.tipoDeUsuario.name() eq 'PROFESSOR'}" 
+			<p:commandButton value="#{key.adicionarNota}" rendered="#{bean.tipoDeUsuario.name() eq 'PROFESSOR'}" 
 			actionListener="#{bean.prepararAdicaoDeNota(aluno)}" process="@this" update="@form:dialog-form-nota" oncomplete="PF('dialog-form-nota-widgetvar').show()">
 				<p:resetInput target="@form:dialog-form-nota"/>
 			</p:commandButton>

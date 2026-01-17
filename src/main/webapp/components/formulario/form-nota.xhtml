@@ -9,22 +9,22 @@
 	<p:dialog id="dialog-form-nota" widgetVar="dialog-form-nota-widgetvar"  closeOnEscape="true" header="Adicionar Nota" modal="true" resizable="false">
 		<p:message id="nota-message" showDetail="true" for="nota"/>
 		<p:panelGrid columns="2" >
-			<p:outputLabel for="data" value="Data: "/>
+			<p:outputLabel for="data" value="#{key.data}: "/>
 			<p:calendar id="data" pattern="dd/MM/yyyy" mask="99/99/9999" value="#{bean.nota.data}"/>
 			
-			<p:outputLabel for="nota" value="Nota: "/>
+			<p:outputLabel for="nota" value="#{key.nota}: "/>
 			<p:inputNumber id="nota" decimalPlaces="2" value="#{bean.nota.nota}" />
 			
-			<p:outputLabel for="descricao" value="Descrição: "/>
+			<p:outputLabel for="descricao" value="#{key.descricao} "/>
 			<p:inputTextarea id="descricao" value="#{bean.nota.descricao}" style="width: 300px"/>
 			
-			<p:outputLabel value="Aluno: "/>
+			<p:outputLabel value="#{key.aluno}: "/>
 			<h:outputText value="#{bean.nota.aluno.usuario.nome}"/>
 			
-			<p:outputLabel value="Curso: "/>
+			<p:outputLabel value="#{key.curso}: "/>
 			<h:outputText value="#{bean.nota.curso.nome}"/>
 		</p:panelGrid>
-		<p:commandButton value="Salvar" actionListener="#{bean.salvarNota()}" oncomplete="if (!args.validationFailed) PF('dialog-form-nota-widgetvar').hide()"
+		<p:commandButton value="#{key.salvar}" actionListener="#{bean.salvarNota()}" oncomplete="if (!args.validationFailed) PF('dialog-form-nota-widgetvar').hide()"
 				update="nota-message mainForm:data-table-notas" process="@this mainForm:dialog-form-nota" styleClass="button-salvar"/>
 	</p:dialog>	
 </ui:fragment>

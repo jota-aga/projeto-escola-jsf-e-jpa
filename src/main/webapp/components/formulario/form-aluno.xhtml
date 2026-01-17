@@ -6,34 +6,34 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
-	<p:dialog id="dialog-form-aluno" widgetVar="dialog-form-aluno-widgetvar" closeOnEscape="true" header="Editar Aluno" modal="true" resizable="false">
+	<p:dialog id="dialog-form-aluno" widgetVar="dialog-form-aluno-widgetvar" closeOnEscape="true" header="#{key.editarAluno}" modal="true" resizable="false">
 		<p:panelGrid columns="2">
-			<p:outputLabel for="nome" value="Nome: "/>
+			<p:outputLabel for="nome" value="#{key.nome}: "/>
 			<p:inputText id="nome" value="#{bean.aluno.usuario.nome}" />
 			
-			<p:outputLabel for="dataNascimento" value="Data de Nascimento "/>
+			<p:outputLabel for="dataNascimento" value="#{key.dataNascimento}: "/>
 			<p:calendar id="dataNascimento" value="#{bean.aluno.dataNascimento}" />
 			
-			<p:outputLabel for="matricula" value="Matrícula: "/>
+			<p:outputLabel for="matricula" value="#{key.matricula}: "/>
 			<p:inputText id="matricula" value="#{bean.aluno.matricula}" />
 			
-			<p:outputLabel value="Cursos: "/>
+			<p:outputLabel value="#{key.curso}: "/>
 			<h:panelGroup>
-				<p:commandButton styleClass="button" value="Cursos"
+				<p:commandButton styleClass="button" value="#{key.cursos}"
 				oncomplete="PF('selecionar-cursos-dialog-widgetvar').show()"
 				process="@this" rendered="#{!bean.cursos.isEmpty()}" update="selecionar-cursos-dialog"/>
 				
-			<h:outputText value="Nenhum curso disponível no momento" rendered="#{bean.cursos.isEmpty()}" />
+			<h:outputText value="#{key.nenhumCursoDisponivel}" rendered="#{bean.cursos.isEmpty()}" />
 			</h:panelGroup>
 			
 			<p:outputLabel for="cpf" value="CPF: "/>
 			<p:inputMask id="cpf" mask="999.999.999-99" value="#{bean.aluno.usuario.cpf}"/>
 			
-			<p:outputLabel for="senha" value="Senha: "/>
+			<p:outputLabel for="senha" value="#{key.senha}: "/>
 			<p:inputText id="senha" value="#{bean.aluno.usuario.senha}" />
 			
 		</p:panelGrid>
-		<p:commandButton value="Salvar" actionListener="#{bean.salvarAluno()}" oncomplete="if ()!args.validationFailed) PF('dialog-form-aluno').hide()"
+		<p:commandButton value="#{key.salvar}" actionListener="#{bean.salvarAluno()}" oncomplete="if ()!args.validationFailed) PF('dialog-form-aluno').hide()"
 				update="dialog-form-aluno data-table-alunos" process="dialog-form-aluno" styleClass="button-salvar"/>
 	</p:dialog>	
 	

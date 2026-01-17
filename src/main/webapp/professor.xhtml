@@ -7,9 +7,9 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	template="/WEB-INF/template/template.xhtml">
 	
-	<ui:define name="titulo">Portal Professor</ui:define>
+	<ui:define name="titulo">#{key.tituloDaPaginaProfessor}</ui:define>
 	
-	<ui:define name="titulo-cabecalho">Professor</ui:define>
+	<ui:define name="titulo-cabecalho">#{key.professor}</ui:define>
 	
 	<ui:define name="conteudo">
 		<ui:include src="/components/datatable/data-table-alunos.xhtml">

@@ -6,19 +6,19 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
-	<p:dataTable id="data-table-for-aluno" value="#{alunoBean.aluno.cursos}" var="curso" emptyMessage="O aluno não está cursando nenhum curso" 
+	<p:dataTable id="data-table-for-aluno" value="#{alunoBean.aluno.cursos}" var="curso" emptyMessage="#{key.alunoSemCurso}" 
 	style="text-align:center; width: 700px">
-		<p:column headerText="Curso">
+		<p:column headerText="#{key.curso}">
 			<h:outputText value="#{curso.nome}"/>
 		</p:column>
 		
-		<p:column headerText="Opções">
-			<p:commandButton icon="fa fa-eye" value="Ver Notas" actionListener="#{alunoBean.verNotasDoAluno(curso)}" 
+		<p:column headerText="#{key.opcoes}">
+			<p:commandButton icon="fa fa-eye" value="#{key.verNotas}" actionListener="#{alunoBean.verNotasDoAluno(curso)}" 
 			oncomplete="PF('dialog-notas-widgetvar').show()" update="@form:dialog-notas" process="@this"/>
 		</p:column>
 	</p:dataTable>
 	
-	<ui:include src="/components/dialog/datatable/data-table-notas.xhtml">
+	<ui:include src="/components/datatable/data-table-notas.xhtml">
 		<ui:param name="bean" value="#{alunoBean}"></ui:param>
 	</ui:include>
 	
