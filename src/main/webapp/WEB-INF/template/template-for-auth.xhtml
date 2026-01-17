@@ -6,23 +6,21 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	template="/WEB-INF/template/template-for-admin.xhtml">
-	
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<h:outputStylesheet library="css" name="auth-style.css"/>
-	<title> #{titulo}</title>
-</h:head>
-
-<h:body>
-	
-		<p:link href="#{link}">#{nomeLink}</p:link>
-		<ui:include src="/components/select-locale.xhtml"/>
-		<h:form id="mainForm" styleClass="formulario-principal">
-			<h1>#{tituloForm}</h1>
-			<p:growl id="messages" showSummary="true" showDetail="true"/>
-			<ui:insert name="conteudo"></ui:insert>
-		</h:form>
-	
-
-</h:body>
+	<f:view locale="#{localeBean.locale}">
+		<h:head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<h:outputStylesheet library="css" name="auth-style.css"/>
+			<title> #{titulo}</title>
+		</h:head>
+		
+		<h:body>
+				<p:link href="#{link}">#{nomeLink}</p:link>
+				<h:form id="mainForm" styleClass="formulario-principal">
+					<h1>#{tituloForm}</h1>
+					<p:growl id="messages" showSummary="true" showDetail="true"/>
+					<ui:insert name="conteudo"></ui:insert>
+				</h:form>
+				<ui:include src="/components/select-locale.xhtml"/>
+		</h:body>
+	</f:view>
 </html>

@@ -21,16 +21,12 @@ public class LocaleBean implements Serializable{
 	
 	@PostConstruct
 	public void init() {
-		locale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
+		locale = new Locale("PT", "BR");
 		
 		localesDisponiveis = new ArrayList<>();
 		
 		localesDisponiveis.add(new Locale("PT", "BR"));
 		localesDisponiveis.add(Locale.US);
-		
-		UIViewRoot view = FacesContext.getCurrentInstance().getViewRoot();
-		
-		view.setLocale(Locale.US);
 	}
 	
 	public void setLocaleDaPagina() {
@@ -38,7 +34,6 @@ public class LocaleBean implements Serializable{
 		
 		view.setLocale(locale);
 		
-		System.out.println("===================IDIOMA: " + view.getLocale().getLanguage());
 	}
 
 	public Locale getLocale() {

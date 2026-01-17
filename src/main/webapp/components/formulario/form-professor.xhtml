@@ -9,29 +9,29 @@
 	<p:dialog id="dialog-form-professor" widgetVar="dialog-form-professor-widgetvar"  value="#{adminBean.professores}" closeOnEscape="true" 
 	header="Editar Professor" modal="true" resizable="false">
 		<p:panelGrid columns="2" >
-			<p:outputLabel for="nome" value="Nome: "/>
+			<p:outputLabel for="nome" value="#{key.nome}: "/>
 			<p:inputText id="nome" value="#{bean.professor.usuario.nome}" />
 			
-			<p:outputLabel for="formacao" value="Formação "/>
+			<p:outputLabel for="formacao" value="#{key.formacao}: "/>
 			<p:inputText id="formacao" value="#{bean.professor.formacao}" />
 			
-			<p:outputLabel value="Cursos: "/>
+			<p:outputLabel value="#{key.cursos}: "/>
 			<h:panelGroup>
-				<p:commandButton styleClass="button" value="Cursos"
+				<p:commandButton styleClass="button" value="#{key.cursos}"
 				oncomplete="PF('selecionar-cursos-dialog-widgetvar').show()"
 				process="@this" rendered="#{!bean.cursos.isEmpty()}" update="selecionar-cursos-dialog"/>
 				
-			<h:outputText value="Nenhum curso disponível no momento" rendered="#{bean.cursos.isEmpty()}" />
+			<h:outputText value="#{key.nenhumCursoDisponivel}" rendered="#{bean.cursos.isEmpty()}" />
 			</h:panelGroup>
 			
 			<p:outputLabel for="cpf" value="CPF: "/>
 			<p:inputMask id="cpf" mask="999.999.999-99" value="#{bean.professor.usuario.cpf}"/>
 			
-			<p:outputLabel for="senha" value="Senha: "/>
+			<p:outputLabel for="senha" value="#{key.senha}: "/>
 			<p:inputText id="senha" value="#{bean.professor.usuario.senha}" />
 			
 		</p:panelGrid>
-		<p:commandButton value="Salvar" actionListener="#{bean.salvarProfessor()}" oncomplete="if ()!args.validationFailed) PF('dialog-form-professor').hide()"
+		<p:commandButton value="#{key.salvar}" actionListener="#{bean.salvarProfessor()}" oncomplete="if ()!args.validationFailed) PF('dialog-form-professor').hide()"
 				update="dialog-form-professor data-table-professores" process="dialog-form-professor" styleClass="button-salvar"/>
 	</p:dialog>	
 	

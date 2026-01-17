@@ -15,13 +15,13 @@
 			value="#{authBean.usuario.tipoDeUsuario}">
 			<f:selectItems value="#{authBean.tiposDeUsuario}" var="tipo"
 				itemLabel="#{tipo.tipo}" itemValue="#{tipo}" />
-			<p:ajax update="@form:panel-professor @form:panel-aluno"
+			<p:ajax update="@form:panel-professor @form:panel-aluno @form:button-selecionar-curso"
 				process="@this" />
 		</p:selectOneRadio>
 
 		<p:message id="message-nome" for="nome" showDetail="true" />
 		<p:inputText id="nome" value="#{authBean.usuario.nome}"
-			placeholder="Nome" />
+			placeholder="#{key.nome}" />
 
 		<p:message id="message-cpf" for="cpf" showDetail="true" />
 		<p:inputMask id="cpf" mask="999.999.999-99"
@@ -29,45 +29,45 @@
 
 		<p:message id="message-senha" for="senha" showDetail="true" />
 		<p:password id="senha" value="#{authBean.usuario.senha}"
-			placeholder="Senha" />
+			placeholder="#{key.senha}" />
 
 		<p:message id="message-confirmarSenha" for="confirmarSenha"
 			showDetail="true" />
 		<p:password id="confirmarSenha"
 			value="#{authBean.usuario.confirmarSenha}"
-			placeholder="Confirmar Senha" />
+			placeholder="#{key.confirmarSenha}" />
 
 		<h:panelGroup id="panel-professor">
 			<p:inputText id="formacao" value="#{authBean.professor.formacao}"
-				placeholder="Formação" rendered="#{authBean.tipoProfessor}" />
+				placeholder="#{key.graduacao}" rendered="#{authBean.tipoProfessor}" />
 		</h:panelGroup>
 
 		<h:panelGroup id="panel-aluno">
 			<h:panelGroup rendered="#{authBean.tipoAluno}">
 				<p:message id="message-matricula" for="matricula" showDetail="true" />
 				<p:inputText id="matricula" value="#{authBean.aluno.matricula}"
-					placeholder="Matrícula" />
+					placeholder="#{key.matricula}" />
 
 
 				<p:message id="message-data-nascimento" for="dataNascimento"
 					showDetail="true" showSummary="true" />
 				<p:calendar id="dataNascimento"
 					value="#{authBean.aluno.dataNascimento}"
-					placeholder="Data de Nascimento" mask="99/99/9999" />
+					placeholder="#{key.dataNascimento}" mask="99/99/9999" />
 			</h:panelGroup>
 		</h:panelGroup>
 
 		<p:outputLabel value="#{authBean.tipoProfessor? 'Curso:' : 'Cursos:'}" />
 
-		<p:commandButton styleClass="button"
-			value="#{authBean.tipoProfessor? 'Selecionar Curso' : 'Selecionar Cursos'}"
+		<p:commandButton id="button-selecionar-curso" styleClass="button"
+			value="#{authBean.tipoProfessor? key.selecionarCurso : key.selecionarCursos}"
 			oncomplete="PF('selecionar-cursos-dialog-widgetvar').show()"
 			process="@this" rendered="#{!authBean.cursos.isEmpty()}" />
 
-		<h:outputText value="Nenhum curso disponível no momento"
+		<h:outputText value="#{key.nenhumCursoDisponivel}"
 			rendered="#{authBean.cursos.isEmpty()}" />
 
-		<p:commandButton value="Salvar" action="#{authBean.salvarRegistro()}"
+		<p:commandButton value="#{key.salvar}" action="#{authBean.salvarRegistro()}"
 			process="@form"
 			update="message-nome message-cpf message-senha message-confirmarSenha message-tipoDeUsuario message-data-nascimento"
 			styleClass="button-salvar">

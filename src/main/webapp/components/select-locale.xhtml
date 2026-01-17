@@ -7,9 +7,12 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
 	<h:form>
-		<p:selectOneMenu value="#{localeBean.locale}" converter="#{localeBean.localeConverter}" style="float: right">
-			<f:selectItems value="#{localeBean.localesDisponiveis}" var="locale" itemLabel="#{locale.language }" itemValue="#{locale}"/>
-			<p:ajax listener="#{localeBean.setLocaleDaPagina()}" update="@all"/>
-		</p:selectOneMenu>
+		<h:panelGroup style="width: 50px;display:flex; flex-direction:column; align-items: flex-start; margin: 0 auto">
+			<h:outputText value="#{key.idioma} :"/>
+			<p:selectOneMenu value="#{localeBean.locale}" converter="#{localeBean.localeConverter}">
+				<f:selectItems value="#{localeBean.localesDisponiveis}" var="locale" itemLabel="#{locale.language }" itemValue="#{locale}"/>
+				<p:ajax listener="#{localeBean.setLocaleDaPagina()}" update="@all"/>
+			</p:selectOneMenu>
+		</h:panelGroup>
 	</h:form>
 </ui:fragment>

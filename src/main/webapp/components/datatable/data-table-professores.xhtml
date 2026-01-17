@@ -6,9 +6,9 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
-	<p:dataTable id="data-table-professores" value="#{bean.professores}" var="professor" emptyMessage="Nenhum professor cadastrado" 
+	<p:dataTable id="data-table-professores" value="#{bean.professores}" var="professor" emptyMessage="#{key.tabelaVaziaProfessor}" 
 	style="text-align:center; width: 1200px">
-		<p:column headerText="Nome">
+		<p:column headerText="#{key.nome}">
 			<h:outputText value="#{professor.usuario.nome}"/>
 		</p:column>
 		
@@ -16,15 +16,15 @@
 			<h:outputText value="#{professor.usuario.cpf}"/>
 		</p:column>
 		
-		<p:column headerText="Formação">
+		<p:column headerText="#{key.graduacao}">
 			<h:outputText value="#{professor.formacao}"/>
 		</p:column>
 		
-		<p:column headerText="Curso">
+		<p:column headerText="#{key.curso}">
 			<h:outputText value="#{professor.curso == null ? 'Sem curso' : professor.curso.nome}"/>
 		</p:column>
 		
-		<p:column headerText="Opções">
+		<p:column headerText="#{key.opcoes}">
 			<p:commandButton icon="fa fa-pencil" actionListener="#{bean.prepararEdicaoProfessor(professor)}" 
 			oncomplete="PF('dialog-form-professor-widgetvar').show()" process="@this" update="mainForm:dialog-form-professor">
 				<p:resetInput target="mainForm:dialog-form-professor"/>

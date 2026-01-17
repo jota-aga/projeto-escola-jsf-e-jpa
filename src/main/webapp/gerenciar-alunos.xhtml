@@ -6,19 +6,14 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	template="/WEB-INF/template/template-for-admin.xhtml">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<h:outputStylesheet library="css" name="auth-style.css" />
-</h:head>
-
 
 	<f:metadata>
 		<f:viewAction action="#{adminBean.procurarTodosAlunos()}" />
 	</f:metadata>
 	
-	<ui:define name="titulo">#{key.tituloDaPaginaGerenciarAluno}</ui:define>
+	<ui:define name="titulo">#{key.tituloCabecalhoDaPaginaGerenciarAluno}</ui:define>
 	
-	<ui:define name="titulo-cabecalho">#{key.tituloDaPaginaGerenciarAluno}</ui:define>
+	<ui:define name="titulo-cabecalho">#{key.tituloCabecalhoDaPaginaGerenciarAluno}</ui:define>
 
 	<ui:define name="conteudo">
 		<ui:include src="/components/datatable/data-table-alunos.xhtml">

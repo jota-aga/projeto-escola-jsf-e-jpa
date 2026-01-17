@@ -11,18 +11,18 @@
 		<p:resetInput target="dialog-form-curso"/>
 	</p:commandButton>
 	<p:dataTable id="data-table-cursos" value="#{bean.cursos}" var="curso"
-		emptyMessage="O aluno não possui notas no curso"
+		emptyMessage="#{key.alunoSemCurso}"
 		style="text-align:center; width: 600px">
 
-		<p:column headerText="Nome">
+		<p:column headerText="#{key.nome}">
 			<h:outputText value="#{curso.nome}" />
 		</p:column>
 		
-		<p:column headerText="Cor">
+		<p:column headerText="#{key.cor}">
 			<div style="background-color: ##{curso.cor}; width: 30px; height: 30px; margin: 0 auto; border-radius: 30%;" />
 		</p:column>
 
-		<p:column headerText="Opções">
+		<p:column headerText="#{key.opcoes}">
 			<p:commandButton icon="fa fa-pencil" title="Editar Curso"
 				actionListener="#{bean.prepararEdicaoDeCurso(curso)}"
 				oncomplete="PF('dialog-form-curso-widgetvar').show()"

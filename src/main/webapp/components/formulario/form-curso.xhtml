@@ -9,10 +9,10 @@
 	<p:dialog id="dialog-form-curso" widgetVar="dialog-form-curso-widgetvar"  closeOnEscape="true" header="Adicionar Curso" modal="true" resizable="false">
 		<p:messages id="curso-messages"/>
 		<p:panelGrid columns="2" >
-			<p:outputLabel for="nome" value="Nome: "/>
+			<p:outputLabel for="nome" value="#{key.nome}: "/>
 			<p:inputText id="nome" value="#{bean.curso.nome}" required="true"/>
 			
-			<p:outputLabel for="cor" value="Cor: "/>
+			<p:outputLabel for="cor" value="#{key.cor}: "/>
 			<p:colorPicker id="cor" value="#{bean.curso.cor}" required="true"/>
 		
 		</p:panelGrid>

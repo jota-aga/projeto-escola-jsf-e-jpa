@@ -5,27 +5,29 @@
  	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-	
-	<h:head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<h:outputStylesheet library="css" name="template-style.css"/>
-		<ui:insert name="head"></ui:insert>
-		<title> <ui:insert name="titulo"/></title>
-	</h:head>
-	
-	<h:body styleClass="body">
-		<h:form id="mainForm" style="padding-bottom: 30px">
-			<header>
-			<h1><ui:insert name="titulo-cabecalho"/></h1>
-			
-				<p:growl id="messages" showSummary="true" showDetail="true"/>
-				<p:commandButton action="#{authBean.logout()}" value="Logout" process="@this" styleClass="button-logout"/>
-				<ui:include src="/components/select-locale.xhtml"/>
-			</header>
-			
-			<div>
-				<ui:insert name="conteudo"></ui:insert>
-			</div>
-		</h:form>
-	</h:body>
+	<f:view locale="#{localeBean.locale}">
+		<h:head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<h:outputStylesheet library="css" name="template-style.css"/>
+			<ui:insert name="head"></ui:insert>
+			<title> <ui:insert name="titulo"/></title>
+		</h:head>
+		
+		<h:body styleClass="body">
+			<h:form id="mainForm" style="padding-bottom: 30px">
+				<header>
+					<h1><ui:insert name="titulo-cabecalho"/></h1>
+					<p:growl id="messages" showSummary="true" showDetail="true"/>
+					<p:commandButton action="#{authBean.logout()}" value="Logout" process="@this" styleClass="button-logout"/>
+					
+				</header>
+				
+				<div>
+					<ui:insert name="conteudo"></ui:insert>
+				</div>
+				
+			</h:form>
+			<ui:include src="/components/select-locale.xhtml"/>
+		</h:body>
+	</f:view>	
 </html>
